@@ -1,0 +1,68 @@
+.loginContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.loginWelcom {
+  padding-top: 20px;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+}
+
+.img {
+  height: 300px;
+}
+
+.loginForm {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 20px;
+  background: #ffffff;
+  color: #51595e;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+   
+}
+
+.loginTitle{
+  margin: 50px;
+}
+
+
+.loginButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 50px;
+  margin-right: 50px;
+
+
+}
+
+.loginDiscription {
+  text-align: center;
+  line-height: 0;
+  font-size: 18px;
+
+}
+
+.loginFormik {
+  justify-content: space-around;
+  text-align: center;
+  line-height: 5;
+ 
+
+}
+
+
+.formSummaryEerror {
+  border: 2px solid red;
+  padding: 5px;
+  color: red
+}
