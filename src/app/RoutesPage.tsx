@@ -1,7 +1,7 @@
 import React from 'react'
 import {  Routes, Route } from 'react-router-dom'
 import { Login } from "../components/Auth/Login/Login"
-import { Registration } from '../components/Auth/Registration/Registration'
+import { Registration } from '../components/Auth/Registration/RegistrationUI/Registration'
 
 export enum PATH {
   LOGIN = '/login',

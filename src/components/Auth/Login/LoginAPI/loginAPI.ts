@@ -1,5 +1,4 @@
-import { AxiosResponse } from 'axios';
-import { instance } from './../../../../api/instance';
+import { instance } from '../../../../api/instance';
 
 export const loginAPI = {
   async login(data: LoginType)

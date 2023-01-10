@@ -1,6 +1,6 @@
 import React from 'react';
 import { RoutesPage } from './app/RoutesPage';
-import { Registration } from './components/Auth/Registration/Registration';
+import { Registration } from './components/Auth/Registration/RegistrationUI/Registration';
 
 
 

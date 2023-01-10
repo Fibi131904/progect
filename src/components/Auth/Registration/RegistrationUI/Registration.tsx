@@ -3,7 +3,7 @@ import { Button,
   Form,
   Input 
 } from 'antd';
-import s from '../Auth.module.css'
+import s from '../../Auth.module.css'
 import { Link } from 'react-router-dom';
 
 

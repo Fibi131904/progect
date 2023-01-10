@@ -1,6 +1,7 @@
 import axios from "axios"
 import { AppThunk, InferActionTypes } from "../../../../store/store"
-import { loginAPI, LoginType } from "./loginAPI"
+import { loginAPI, LoginType } from "../LoginAPI/loginAPI"
+
 
 const loginInitialState={
   isLoggedIn: false,
