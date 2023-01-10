@@ -1,0 +1,39 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form {
+  
+  border: 1px solid;
+  border-radius: 10px; 
+  background: #ffffff;
+  color: #51595e;
+  height: 400px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+align-items: center;    
+}
+
+.title {
+  margin:0  auto;
+}
+
+
+
+.loginButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 50px;
+  margin-right: 50px;
+
+}
+
+.formSummaryEerror {
+  border: 2px solid red;
+  padding: 5px;
+  color: red
+}

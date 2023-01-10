@@ -27,13 +27,15 @@ export const loginActions = {
       ({type: 'LOGIN/SET-LOGIN', payload: {isLoading}} as const),
 }
 
-export const login = (data: LoginType): AppThunk => async dispatch => {
-  dispatch(loginActions.setIsLoading(true))
+export const loginTC = (data: LoginType): AppThunk => async (dispatch )=> {
+
   try {
-      const res = await loginAPI.login(email, password, rememberMe?)
-   
+
+      let res = await loginAPI.login(data)
+      if(res.data){
+   console.log(res.data)
       dispatch(loginActions.setIsLoggedIn(true))
-    
+      }
   } catch (e) {
       if (axios.isAxiosError(e)) {
           dispatch(loginActions.setLoginError(e.response ? e.response.data.error : e.message))
@@ -45,7 +47,7 @@ export const login = (data: LoginType): AppThunk => async dispatch => {
   }
 }
 
-export const logout = (): AppThunk => async dispatch => {
+export const logoutTC = (): AppThunk => async dispatch => {
   try {
       await loginAPI.logout()
       dispatch(loginActions.setLoginError(''))

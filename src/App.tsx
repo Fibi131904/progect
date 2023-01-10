@@ -1,10 +1,14 @@
 import React from 'react';
-import { Login } from './components/Auth/Login/Login';
+import { RoutesPage } from './app/RoutesPage';
+import { Registration } from './components/Auth/Registration/Registration';
+
 
 
 function App() {
-  return (
-   <Login/>
+  return (<div>
+    <RoutesPage/>
+    <Registration/>
+    </div>
   );
 }
 
