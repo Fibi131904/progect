@@ -1,13 +1,15 @@
+import { Header } from 'antd/es/layout/layout';
 import React from 'react';
 import { RoutesPage } from './app/RoutesPage';
-import { Registration } from './components/Auth/Registration/RegistrationUI/Registration';
+
 
 
 
 function App() {
   return (<div>
+    <Header/>
     <RoutesPage/>
-    <Registration/>
+   
     </div>
   );
 }

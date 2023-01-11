@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button,
   Form,
   Input 
 } from 'antd';
-import s from '../../Auth.module.css'
-import { Link } from 'react-router-dom';
+import s from '../../../../styles/Auth.module.css'
+import {Link, Navigate} from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
+import { signUp } from '../RegistrationBLL/registration-reducer';
 
 
 const formItemLayout = {
@@ -31,12 +33,17 @@ const tailFormItemLayout = {
 };
 
 export const Registration: React.FC = () => {
+  const isRegistered = useAppSelector(state => state.registration.isRegistered)
   const [form] = Form.useForm();
-
+  const dispatch = useAppDispatch()
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+    // console.log('Received values of form: ', values);
+    dispatch(signUp(values))
   };
-  const [autoCompleteResult, setAutoCompleteResult] = useState<string[]>([]);
+  // const [autoCompleteResult, setAutoCompleteResult] = useState<string[]>([]);
+  if (isRegistered) {
+    return <Navigate to={'/login'}/>
+}
 
  
   return (

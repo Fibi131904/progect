@@ -1,0 +1,23 @@
+.nav {
+  min-width: 20%;
+  width: 20%;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  padding: 3px 0;
+}
+
+.nav:hover {
+  color: #00f6fa;
+  background: linear-gradient(to right, #b16fac, #9b4caf, #543d8a, #9b2a99, #4a013a);
+}
+
+.active {
+  min-width: 15%;
+  width: 20%;
+  text-decoration: none;
+  color: #00f6fa;
+  text-align: center;
+  background: linear-gradient(to right, #b16fac, #9b4caf, #543d8a, #9b2a99, #4a013a);
+}

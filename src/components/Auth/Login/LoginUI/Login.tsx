@@ -2,10 +2,11 @@ import { Button, Checkbox, Input, Space } from 'antd'
 import { useFormik } from 'formik'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { AppStateType, useAppDispatch } from '../../../store/store'
-import s from '../Auth.module.css'
-import { loginTC } from './LoginBLL/login-reducer'
+import { Link, Navigate } from 'react-router-dom'
+import { PATH } from '../../../../app/RoutesPage'
+import { AppStateType, useAppDispatch } from '../../../../store/store'
+import s from '../../../../styles/Auth.module.css'
+import { loginTC } from '../LoginBLL/login-reducer'
 
 type FormikErrorType = {
   email?: string
@@ -14,7 +15,7 @@ type FormikErrorType = {
 }
 
 export const Login = () => {
-  const isAuth = useSelector<AppStateType, boolean>(
+  const isLoggedIn  = useSelector<AppStateType, boolean>(
     (state) => state.login.isLoggedIn
   )
   const dispatch = useAppDispatch()
@@ -45,12 +46,14 @@ export const Login = () => {
 
     onSubmit: (values) => {
       dispatch(loginTC(values))
+     
     },
   })
+  
 
-  //   if (isAuth) {
-  //     return <Redirect to={'/profile'} />
-  //  }
+     if (isLoggedIn ) {
+       return <Navigate to={PATH.PROFILE} />
+   }
   return (
     <div className={s.container}>
       <div className={s.form}>
@@ -87,7 +90,7 @@ export const Login = () => {
               </Button>
             </div>
             <div>Alredy have an account?</div>
-            <Link to="/register">Sign Up</Link>
+            <Link to="/registration">Sign Up</Link>
           </Space>
         </form>
       </div>

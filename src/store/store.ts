@@ -3,6 +3,7 @@ import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { LoginActionsType, loginReducer } from './../components/Auth/Login/LoginBLL/login-reducer';
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { RegistrationActionTypes, registrationReducer } from '../components/Auth/Registration/RegistrationBLL/registration-reducer';
+import { ProfileActionTypes, profileReducer } from '../components/Profile/ProfileBLL/profile-reducer';
 
 
 export type AppStateType = ReturnType<typeof rootReducer>
@@ -10,6 +11,7 @@ export type AppStateType = ReturnType<typeof rootReducer>
 const rootReducer = combineReducers({
   login: loginReducer,
   registration: registrationReducer,
+  profile: profileReducer,
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
@@ -23,6 +25,7 @@ export type InferActionTypes<T> = T extends { [ keys: string ]: (...args: any[])
 
 export type AppActionsType = LoginActionsType
  | RegistrationActionTypes
+ | ProfileActionTypes
 
 
 export type AppDispatch = ThunkDispatch<RootStateType, unknown, AnyAction>

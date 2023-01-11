@@ -1,19 +1,24 @@
 import React from 'react'
-import {  Routes, Route } from 'react-router-dom'
-import { Login } from "../components/Auth/Login/Login"
+import { Navigate,  Routes, Route } from 'react-router-dom'
+import { Login } from "../components/Auth/Login/LoginUI/Login"
 import { Registration } from '../components/Auth/Registration/RegistrationUI/Registration'
+import { Profile } from '../components/Profile/ProfileUI/Profile'
+
 
 export enum PATH {
   LOGIN = '/login',
-  REGISTRATION= '/registration'
+  REGISTRATION= '/registration',
+  PROFILE='/profile',
 }
 
 export const RoutesPage=()=>{
   return (
     <Routes>
-     <Route path='/' element={<Login/>}/>
-     <Route path={PATH.LOGIN} element={<Login/>}/>
-     <Route path={PATH.REGISTRATION} element={<Registration/>}/>
+        <Route path={'/'} element={<Navigate to={'/profile'} />} />
+        <Route path={PATH.LOGIN} element={<Login/>}/>
+        <Route path={PATH.REGISTRATION} element={<Registration/>}/>
+        <Route path={PATH.PROFILE} element={<Profile/>}/>   
+    
     </Routes>
   )
 }
