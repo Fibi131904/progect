@@ -5,6 +5,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { RegistrationActionTypes, registrationReducer } from '../components/Auth/Registration/RegistrationBLL/registration-reducer';
 import { ProfileActionTypes, profileReducer } from '../components/Profile/ProfileBLL/profile-reducer';
 import { RecoveryActionTypes, recoveryReducer } from '../components/Auth/Recovery/RecoveryBLL/recovery-reducer';
+import { NewPasswordActionTypes, newPasswordReducer } from '../components/Auth/NewPassword/NewPasswordBLL/newPassword-reducer';
 
 
 export type AppStateType = ReturnType<typeof rootReducer>
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   registration: registrationReducer,
   profile: profileReducer,
   recoverPassword: recoveryReducer,
+  NewPassword: newPasswordReducer,
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
@@ -29,6 +31,7 @@ export type AppActionsType = LoginActionsType
  | RegistrationActionTypes
  | ProfileActionTypes
  | RecoveryActionTypes
+ | NewPasswordActionTypes
 
 
 export type AppDispatch = ThunkDispatch<RootStateType, unknown, AnyAction>

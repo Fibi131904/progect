@@ -28,7 +28,7 @@ export const registrationActions = {
       ({type: 'REGISTRATION/IS_REGISTERED', payload: {isRegistered}} as const), 
      }
 
-export const signUp = (regData: RegisterType): AppThunk => async (dispatch) =>
+export const signUpTC = (regData: RegisterType): AppThunk => async (dispatch) =>
 {
   dispatch(appActions.setAppStatus('loading'))
   registerAPI.signUp(regData)

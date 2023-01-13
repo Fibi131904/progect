@@ -6,7 +6,7 @@ import { Button,
 import s from '../../../../styles/Auth.module.css'
 import {Link, Navigate} from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import { signUp } from '../RegistrationBLL/registration-reducer';
+import { signUpTC } from '../RegistrationBLL/registration-reducer';
 import { PATH } from '../../../../app/RoutesPage';
 
 
@@ -37,11 +37,11 @@ export const Registration: React.FC = () => {
   const isRegistered = useAppSelector(state => state.registration.isRegistered)
   const [form] = Form.useForm();
   const dispatch = useAppDispatch()
+  
   const onFinish = (values: any) => {
-    // console.log('Received values of form: ', values);
-    dispatch(signUp(values))
+       dispatch(signUpTC(values))
   };
-  // const [autoCompleteResult, setAutoCompleteResult] = useState<string[]>([]);
+
   if (isRegistered) {
     return <Navigate to={PATH.LOGIN}/>
 }
