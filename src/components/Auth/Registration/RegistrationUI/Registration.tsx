@@ -7,6 +7,7 @@ import s from '../../../../styles/Auth.module.css'
 import {Link, Navigate} from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
 import { signUp } from '../RegistrationBLL/registration-reducer';
+import { PATH } from '../../../../app/RoutesPage';
 
 
 const formItemLayout = {
@@ -42,7 +43,7 @@ export const Registration: React.FC = () => {
   };
   // const [autoCompleteResult, setAutoCompleteResult] = useState<string[]>([]);
   if (isRegistered) {
-    return <Navigate to={'/login'}/>
+    return <Navigate to={PATH.LOGIN}/>
 }
 
  

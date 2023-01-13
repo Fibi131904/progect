@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/store"
 import {  updateUserDataTC } from "../ProfileBLL/profile-reducer"
 import {Navigate} from 'react-router-dom';
 import { logoutTC } from "../../Auth/Login/LoginBLL/login-reducer"
+import { PATH } from "../../../app/RoutesPage"
 
 type ProfileType = {
   title?: string
@@ -46,7 +47,7 @@ const handleLogout = () => {
 }
 
 if (!isLoggedIn) {
-  return <Navigate to={'/login'}/>
+  return <Navigate to={PATH.LOGIN}/>
 }
 
   return (

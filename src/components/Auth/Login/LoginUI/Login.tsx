@@ -15,7 +15,7 @@ type FormikErrorType = {
 }
 
 export const Login = () => {
-  const isLoggedIn  = useSelector<AppStateType, boolean>(
+  const isLoggedIn = useSelector<AppStateType, boolean>(
     (state) => state.login.isLoggedIn
   )
   const dispatch = useAppDispatch()
@@ -46,14 +46,13 @@ export const Login = () => {
 
     onSubmit: (values) => {
       dispatch(loginTC(values))
-     
     },
   })
-  
 
-     if (isLoggedIn ) {
-       return <Navigate to={PATH.PROFILE} />
-   }
+  if (isLoggedIn) {
+    return <Navigate to={PATH.PROFILE} />
+  }
+
   return (
     <div className={s.container}>
       <div className={s.form}>
@@ -61,7 +60,7 @@ export const Login = () => {
           <h2>Login</h2>
         </div>
 
-        <form onSubmit={formik.handleSubmit} >
+        <form onSubmit={formik.handleSubmit}>
           <Space direction="vertical">
             <Input placeholder="Login" {...formik.getFieldProps('email')} />
 
@@ -82,15 +81,16 @@ export const Login = () => {
               />
               Remember me
             </div>
-            <div>Forgot Password?</div>
 
-            <div className={s.loginButton}>
+            <Link to={PATH.RECOVERY}>Forgot Password?</Link>
+
+            <div className={s.btn}>
               <Button type={'primary'} htmlType="submit" shape={'default'}>
                 Login
               </Button>
             </div>
             <div>Alredy have an account?</div>
-            <Link to="/registration">Sign Up</Link>
+            <Link to={PATH.REGISTRATION}>Sign Up</Link>
           </Space>
         </form>
       </div>
