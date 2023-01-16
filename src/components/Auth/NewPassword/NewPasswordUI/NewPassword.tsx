@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button, Form, Input, Space } from 'antd'
+import React, { useCallback }  from 'react'
+import { Button,  Input, Space } from 'antd'
 import {Navigate, useParams} from 'react-router-dom';
 import { PATH } from '../../../../app/RoutesPage'
 import { useAppDispatch, useAppSelector } from '../../../../store/store'
@@ -13,10 +13,11 @@ export const NewPassword: React.FC = () => {
   const isPassChanged = useAppSelector(
     (state) => state.NewPassword.isPassChanged
   )
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
+
   const {token} = useParams()
-  const [form] = Form.useForm()
+ 
   const dispatch = useAppDispatch()
+
   const formik = useFormik({
     initialValues: {
         password: '',
@@ -33,14 +34,29 @@ export const NewPassword: React.FC = () => {
         
         return errors;
     },
+
     onSubmit: values => {
    token && dispatch(changeRassword({password: values.password, resetPasswordToken: token}))
     }
   })
 
+  const [valuesPassword, setValuesPassword] = React.useState<StatePassword>({
+    password: '',
+    showPassword: false,
+});
+
+
+const handleClickShowPassword = useCallback(() => {
+  setValuesPassword({
+      ...valuesPassword,
+      showPassword: !valuesPassword.showPassword,
+  });
+}, [valuesPassword]);
 
 
 
+
+  
   if (isPassChanged) {
     return <Navigate to={PATH.LOGIN} />
   }
@@ -55,6 +71,8 @@ export const NewPassword: React.FC = () => {
       <Input.Password
         placeholder="input password"
         iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+        onClick={handleClickShowPassword}
+       
       />
      
         {formik.touched.password && formik.errors.password ? (
@@ -77,6 +95,12 @@ type FormikErrorType = {
   password?: string
   confirmPassword?: string
 }
+
+type StatePassword = {
+  password: string;
+  showPassword: boolean;
+}
+
 
 
 

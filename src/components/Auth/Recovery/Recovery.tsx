@@ -27,11 +27,11 @@ password recovery link:
     <div className={s.container}>
       <div className={s.form}>
         <div className={s.title}>
-          <h2>Login</h2>
+          <h2>Forgot your password?</h2>
         </div>
 
         <Space direction="vertical">
-          <Input placeholder="Login" value={email} onChange={emailEnter} />
+          <Input placeholder="Email" value={email} onChange={emailEnter} />
 
           <div>
             Enteryour email addres and we will send you further instructions

@@ -23,8 +23,9 @@ export const RoutesPage=()=>{
         <Route path={PATH.LOGIN} element={<Login/>}/>
         <Route path={PATH.REGISTRATION} element={<Registration/>}/>
         <Route path={PATH.RECOVERY} element={<Recovery />} />
-        <Route path={'/check-email/:email'} element={<CheckEmail/>}/>
-        <Route path={'/set-new-password/'}>
+        <Route path={'/checkEmail/'} element={<CheckEmail />} />
+        <Route path={'/checkEmail/:email'} element={<CheckEmail/>}/>
+        <Route path={'/setNewPassword/'}>
                 <Route index element={<NewPassword/>}/>
                 <Route path={':token'} element={<NewPassword/>}/>
             </Route>
