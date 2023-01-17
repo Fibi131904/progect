@@ -1,5 +1,6 @@
 import { instance } from '../../../../api/instance';
 
+
 export const loginAPI = {
   async login(data: LoginType)
   {
@@ -9,7 +10,8 @@ export const loginAPI = {
   logout()
   {
     return instance.delete(`auth/me`)
-  }
+  },
+  
 }
 
 export type LoginType = {

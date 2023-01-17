@@ -31,7 +31,7 @@ password recovery link:
         </div>
 
         <Space direction="vertical">
-          <Input placeholder="Email" value={email} onChange={emailEnter} />
+          <Input placeholder="Email" value={email} onChange={emailEnter}  autoComplete="on"/>
 
           <div>
             Enteryour email addres and we will send you further instructions

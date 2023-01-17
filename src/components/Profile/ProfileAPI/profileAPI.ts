@@ -1,12 +1,13 @@
 import { instance } from "../../../api/instance"
+import { UserType } from "../ProfileBLL/profile-reducer";
 import {AxiosResponse} from 'axios'
-import { UserDataType } from "../ProfileBLL/profile-reducer";
 
 export const profileAPI = {
-  me() {
-      return instance.post<any, AxiosResponse<ResponseType>, {}>('auth/me', {})
-  },
-  update(params: UserDataType) {
+
+  update(params: UserType) {
     return instance.put('/auth/me', params)
+},
+me() {
+  return instance.post('/auth/me', {})
 },
 };

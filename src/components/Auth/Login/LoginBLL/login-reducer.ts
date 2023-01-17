@@ -1,12 +1,14 @@
 import axios from "axios"
+import { appActions } from "../../../../app/app-reducer"
 import { AppThunk, InferActionTypes } from "../../../../store/store"
+import { profileActions } from "../../../Profile/ProfileBLL/profile-reducer"
 import { loginAPI, LoginType } from "../LoginAPI/loginAPI"
 
 
 const loginInitialState={
   isLoggedIn: false,
-    error: '',
-    isLoading: false
+      error: '',
+  
 }
 
 export const loginReducer=(state:LoginInitialStateType=loginInitialState, action: LoginActionsType):LoginInitialStateType=>{
@@ -29,13 +31,14 @@ export const loginActions = {
 }
 
 export const loginTC = (data: LoginType): AppThunk => async (dispatch )=> {
-
+    dispatch(appActions.setAppStatus('loading'))
   try {
 
       let res = await loginAPI.login(data)
       if(res.data){
-   console.log(res.data)
+
       dispatch(loginActions.setIsLoggedIn(true))
+      dispatch(profileActions.setUserData(res.data))
       }
   } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -44,7 +47,8 @@ export const loginTC = (data: LoginType): AppThunk => async (dispatch )=> {
           dispatch(loginActions.setLoginError('Some error occurred'))
       }
   } finally {
-      dispatch(loginActions.setIsLoading(false))
+     
+      dispatch(appActions.setAppStatus('succeeded'))
   }
 }
 

@@ -1,3 +1,4 @@
+import { AppActionTypes, appReducer } from './../app/app-reducer';
 import { AnyAction, applyMiddleware, combineReducers, legacy_createStore } from 'redux';
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { LoginActionsType, loginReducer } from './../components/Auth/Login/LoginBLL/login-reducer';
@@ -11,6 +12,7 @@ import { NewPasswordActionTypes, newPasswordReducer } from '../components/Auth/N
 export type AppStateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
+  app: appReducer,
   login: loginReducer,
   registration: registrationReducer,
   profile: profileReducer,
@@ -28,6 +30,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 export type InferActionTypes<T> = T extends { [ keys: string ]: (...args: any[]) => infer U } ? U : never
 
 export type AppActionsType = LoginActionsType
+ | AppActionTypes
  | RegistrationActionTypes
  | ProfileActionTypes
  | RecoveryActionTypes

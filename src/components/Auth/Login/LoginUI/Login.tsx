@@ -1,6 +1,6 @@
-import { Button, Checkbox, Input, Space } from 'antd'
 import { useFormik } from 'formik'
-import React from 'react'
+import React from 'react';
+import { Button, Checkbox, Form, Input } from 'antd';
 import { useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import { PATH } from '../../../../app/RoutesPage'
@@ -8,46 +8,24 @@ import { AppStateType, useAppDispatch } from '../../../../store/store'
 import s from '../../../../styles/Auth.module.css'
 import { loginTC } from '../LoginBLL/login-reducer'
 
-type FormikErrorType = {
-  email?: string
-  password?: string
-  rememberMe?: boolean
-}
+
 
 export const Login = () => {
   const isLoggedIn = useSelector<AppStateType, boolean>(
     (state) => state.login.isLoggedIn
   )
   const dispatch = useAppDispatch()
+  const onFinish = (values: any) => {
+    dispatch(loginTC(values))
+    console.log(values)
+  };
 
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-      rememberMe: false,
-    },
-    validate: (values) => {
-      const errors: FormikErrorType = {}
-      if (!values.email) {
-        errors.email = 'Required'
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-      ) {
-        // проверка email
-        errors.email = 'Invalid email address'
-      }
-      if (!values.password) {
-        errors.password = 'Required'
-      } else if (values.password.length < 3) {
-        errors.password = 'Invalid password'
-      }
-      return errors
-    },
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+ 
+  };
 
-    onSubmit: (values) => {
-      dispatch(loginTC(values))
-    },
-  })
+  
 
   if (isLoggedIn) {
     return <Navigate to={PATH.PROFILE} />
@@ -58,41 +36,48 @@ export const Login = () => {
       <div className={s.form}>
         <div className={s.title}>
           <h2>Login</h2>
-        </div>
+        </div>       
+    <Form
+      name="basic"
+      labelCol={{ span: 8 }}
+      wrapperCol={{ span: 16 }}
+      initialValues={{ remember: false }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="on"
+    >
+      <Form.Item
+        label="Username"
+        name="username"
+        rules={[{ required: true, message: 'Please input your username!' }]}
+      >
+        <Input />
+      </Form.Item>
 
-        <form onSubmit={formik.handleSubmit}>
-          <Space direction="vertical">
-            <Input placeholder="Login" {...formik.getFieldProps('email')} />
+      <Form.Item
+        label="Password"
+        name="password"
+        rules={[{ required: true, message: 'Please input your password!' }]}
+      >
+        <Input.Password />
+      </Form.Item>
 
-            {formik.touched.email && formik.errors.email ? (
-              <div style={{ color: 'red' }}>{formik.errors.email}</div>
-            ) : null}
-            <Input.Password
-              placeholder="password"
-              {...formik.getFieldProps('password')}
-            />
-            {formik.touched.password && formik.errors.password && (
-              <div style={{ color: 'red' }}>{formik.errors.password}</div>
-            )}
-            <div>
-              <Checkbox
-                checked={formik.values.rememberMe}
-                {...formik.getFieldProps('rememberMe')}
-              />
-              Remember me
-            </div>
+      <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+        <Checkbox>Remember me</Checkbox>
+      </Form.Item>
 
-            <Link to={PATH.RECOVERY}>Forgot Password?</Link>
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+      <div>
+        <Link  to={PATH.RECOVERY}>Forgot Password</Link>
+      </div>
+        <Button type="primary" htmlType="submit"  className={s.btn}>
+        Login
+        </Button>
+       <div>Don’t have an account?</div> 
+                <Link to={PATH.REGISTRATION}>Sign Up</Link>
+      </Form.Item>
+    </Form>
 
-            <div className={s.btn}>
-              <Button type={'primary'} htmlType="submit" shape={'default'}>
-                Login
-              </Button>
-            </div>
-            <div>Alredy have an account?</div>
-            <Link to={PATH.REGISTRATION}>Sign Up</Link>
-          </Space>
-        </form>
       </div>
     </div>
   )

@@ -19,9 +19,9 @@ export const RoutesPage=()=>{
   return (
     <Routes>
         <Route path={'/'} element={<Navigate to={'/profile'} />} />
-        <Route path={PATH.PROFILE} element={<Profile/>}/> 
         <Route path={PATH.LOGIN} element={<Login/>}/>
         <Route path={PATH.REGISTRATION} element={<Registration/>}/>
+        <Route path={PATH.PROFILE} element={<Profile/>}/>       
         <Route path={PATH.RECOVERY} element={<Recovery />} />
         <Route path={'/checkEmail/'} element={<CheckEmail />} />
         <Route path={'/checkEmail/:email'} element={<CheckEmail/>}/>

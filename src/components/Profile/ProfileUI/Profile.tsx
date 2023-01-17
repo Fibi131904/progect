@@ -20,11 +20,11 @@ type ProfileType = {
 
 export const Profile:React.FC<ProfileType>=({disabled})=>{
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn)
-  const userName = useAppSelector(state => state.profile.name)
-  const userAvatar = useAppSelector(state => state.profile.avatar)
-  const userId = useAppSelector(state => state.profile._id)
-  const email = useAppSelector(state => state.profile.email)
-  const publicCardPacksCount = useAppSelector(state => state.profile.publicCardPacksCount)
+  const userName = useAppSelector(state => state.profile.user.name)
+  const userAvatar = useAppSelector(state => state.profile.user.avatar)
+  const userId = useAppSelector(state => state.profile.user._id)
+  const email = useAppSelector(state => state.profile.user.email)
+  const publicCardPacksCount = useAppSelector(state => state.profile.user.publicCardPacksCount)
 
 
 
@@ -39,7 +39,15 @@ export const Profile:React.FC<ProfileType>=({disabled})=>{
     }
   }
   const changeUserName = (name: string) => {
-    dispatch(updateUserDataTC({name: name, avatar: userAvatar, _id: userId, publicCardPacksCount, email}))
+    dispatch(
+      updateUserDataTC({
+        name: name,
+        avatar: userAvatar,
+        _id: userId,
+        publicCardPacksCount,
+        email,
+      })
+    )
 }
 
 const handleLogout = () => {
@@ -51,10 +59,10 @@ if (!isLoggedIn) {
 }
 
   return (
-    <div className={s.wrapper}>
+    <div className={s.container}>
       <div className={s.form}>
         <h3>Personal Information</h3>
-        <div className={s.container}>
+        <div >
         <img className={s.imgEmail} src={userPhoto} alt={'Repsonal img'} />
        <div className={s.userNickName}>
         <EditableSpan title={userName}  changeTitle={changeUserName}  setEditMode={setEditMode} editMode={editMode}       
@@ -65,13 +73,13 @@ if (!isLoggedIn) {
         </div>
         <div className={s.infoBlock}>
         <div>
-          <b>E-mail:</b>
+          <b>E-mail:</b>{email}
         </div>
         <div>
-          <b>Card Packs: </b> 
+          <b>Card Packs: </b> {publicCardPacksCount}
         </div>
         </div>
-        <Button color={'primary'} onClick={handleLogout} >
+        <Button color={'primary'} onClick={handleLogout} className={s.btn}>
           Logout
         </Button>
       </div>

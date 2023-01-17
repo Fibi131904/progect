@@ -4,15 +4,13 @@ import { profileAPI} from "../ProfileAPI/profileAPI"
 import { AxiosError } from "axios"
 import { appActions } from "../../../app/app-reducer"
 
+
 const profileInitialState = {
-  _id: '',
-  name: 'Enter your name',
-  avatar: '',
-  publicCardPacksCount: 0,
-  email: ''
+  isInitialized: false,
+  user: {} as UserType ,
 }
 
-export const profileReducer=(state:  UserDataType = profileInitialState, action:ProfileActionTypes):ProfileStateType=>{
+export const profileReducer=(state:  ProfileStateType = profileInitialState, action:ProfileActionTypes):ProfileStateType=>{
   switch(action.type){
     case 'profile/SET_USER_DATA':
       case 'profile/SET_IS_INITIALIZED':
@@ -23,10 +21,11 @@ export const profileReducer=(state:  UserDataType = profileInitialState, action:
 
 }
 export const profileActions={
-  setUserData: (userData: UserDataType) => ({type: 'profile/SET_USER_DATA', payload: {userData}} as const),
+  setUserData: (user: UserType) => ({type: 'profile/SET_USER_DATA', payload: {user}} as const),
   setIsInitialized: (isInitialized: boolean) => ({type: 'profile/SET_IS_INITIALIZED', payload: {isInitialized}} as const)
 }
-export const updateUserDataTC = (userData: UserDataType): AppThunk => async (dispatch) =>
+
+export const updateUserDataTC = (userData: UserType): AppThunk => async (dispatch) =>
 {
   dispatch(appActions.setAppStatus('loading'))
   profileAPI.update(userData)
@@ -40,13 +39,28 @@ export const updateUserDataTC = (userData: UserDataType): AppThunk => async (dis
           dispatch(appActions.setAppStatus('succeeded'))
       })
 }
+export const authMe = ():AppThunk=>(dispatch)=>{
+  dispatch(appActions.setAppStatus('loading'))
+  profileAPI.me()
+  
+  .then((res)=>{
 
+ console.log(res.data)
+      dispatch(appActions.setAppIsLoading(true))
+      dispatch(profileActions.setUserData(res.data))
+
+  })
+  .finally(() => {
+      dispatch(appActions.setInitialized(true))
+      dispatch(appActions.setAppStatus('succeeded'))
+  })
+}
 
 
 export type ProfileStateType = typeof profileInitialState
 export type ProfileActionTypes = InferActionTypes<typeof profileActions>
 
-export type UserDataType = {
+export type UserType = {
   _id: string
   email: string
   rememberMe?: boolean
@@ -59,5 +73,5 @@ export type UserDataType = {
   __v?: number
   token?: string
   tokenDeathTime?: number
-  avatar: string
+  avatar:  null
 }

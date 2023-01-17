@@ -1,5 +1,6 @@
 import { Input } from 'antd'
 import React, { ChangeEvent, useState } from 'react'
+import { useAppSelector } from '../../store/store'
 
 
 type EditableSpanPropsType = {
@@ -11,8 +12,8 @@ type EditableSpanPropsType = {
 
 export const EditableSpan = React.memo(
   ({ title, changeTitle, editMode, setEditMode }: EditableSpanPropsType) => {
-   // const userName = useAppSelector((state) => state.profile.name)
-   //@ts-ignore
+   const userName = useAppSelector((state) => state.profile.user.name)
+
     let [localTitle, setLocalTitle] = useState(userName)
 
     const activateEditMode = () => {

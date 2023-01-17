@@ -1,106 +1,116 @@
-import React, { useCallback }  from 'react'
-import { Button,  Input, Space } from 'antd'
-import {Navigate, useParams} from 'react-router-dom';
-import { PATH } from '../../../../app/RoutesPage'
-import { useAppDispatch, useAppSelector } from '../../../../store/store'
+import React from 'react'
+import { Navigate, useParams } from 'react-router-dom'
+import { Button, Form, Input } from 'antd'
 import s from '../../../../styles/Auth.module.css'
+import { useAppDispatch, useAppSelector } from '../../../../store/store'
 import { changeRassword } from '../NewPasswordBLL/newPassword-reducer'
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { useFormik } from 'formik';
 
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 8 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 },
+  },
+}
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
+    },
+    sm: {
+      span: 16,
+      offset: 8,
+    },
+  },
+}
 
 export const NewPassword: React.FC = () => {
   const isPassChanged = useAppSelector(
     (state) => state.NewPassword.isPassChanged
   )
-
-  const {token} = useParams()
- 
   const dispatch = useAppDispatch()
+  const [form] = Form.useForm()
+  const { token } = useParams()
 
-  const formik = useFormik({
-    initialValues: {
-        password: '',
-        
-    },
-    validate: (values) => {
-        const errors: FormikErrorType = {};
-        if (!values.password) {
-            errors.password = 'Required';
-        } else if (values.password.length <= 7) {
-            errors.password = 'Password must be more than 7 characters...'
-        }
-       
-        
-        return errors;
-    },
-
-    onSubmit: values => {
-   token && dispatch(changeRassword({password: values.password, resetPasswordToken: token}))
-    }
-  })
-
-  const [valuesPassword, setValuesPassword] = React.useState<StatePassword>({
-    password: '',
-    showPassword: false,
-});
-
-
-const handleClickShowPassword = useCallback(() => {
-  setValuesPassword({
-      ...valuesPassword,
-      showPassword: !valuesPassword.showPassword,
-  });
-}, [valuesPassword]);
-
-
-
-
-  
-  if (isPassChanged) {
-    return <Navigate to={PATH.LOGIN} />
+  const onFinish = (values: any) => {
+    token &&
+      dispatch(
+        changeRassword({ password: values.password, resetPasswordToken: token })
+      )
   }
 
- 
+  if (isPassChanged) {
+    return <Navigate to={'/login'} />
+  }
+
   return (
     <div className={s.wrapper}>
-    <form onSubmit={formik.handleSubmit} className={s.form}>
-      <h3>Create New Password</h3>
-      <Space direction="vertical">
-      <Input.Password placeholder="input password" />
-      <Input.Password
-        placeholder="input password"
-        iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-        onClick={handleClickShowPassword}
-       
-      />
-     
-        {formik.touched.password && formik.errors.password ? (
-          <div>{formik.errors.password}</div>
-        ) : null}
-        <div className={s.text}>
-        Create new password and we will send you further instructions to email
+      <Form
+        className={s.form}
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onFinish}
+        initialValues={{
+          residence: ['zhejiang', 'hangzhou', 'xihu'],
+          prefix: '86',
+        }}
+        scrollToFirstError>
+        <div className={s.title}>
+          <h2>Create new password</h2>
         </div>
-        <Button  type={'primary'} htmlType="submit" shape={'default'}>
-        Create new password
-        </Button>
-        </Space>
-        </form>
+
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+          hasFeedback>
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item
+          name="confirm"
+          label="Confirm Password"
+          dependencies={['password']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: 'Please confirm your password!',
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve()
+                }
+                return Promise.reject(
+                  new Error('The two passwords that you entered do not match!')
+                )
+              },
+            }),
+          ]}>
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item {...tailFormItemLayout}>
+          <div>
+            Create new password and we will send you further instructions to
+            email
+          </div>
+          <Button type="primary" htmlType="submit">
+            Create new password
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
-   
   )
 }
-
-type FormikErrorType = {
-  password?: string
-  confirmPassword?: string
-}
-
-type StatePassword = {
-  password: string;
-  showPassword: boolean;
-}
-
-
-
-
