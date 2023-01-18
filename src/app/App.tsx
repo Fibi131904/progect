@@ -10,7 +10,7 @@ import { RoutesPage } from './RoutesPage';
 
 
 export const App=()=> {
-  const isInitialized = useAppSelector((state) => state.app.isInitialized)
+
   const isLoading = useAppSelector((state) => state.app.isLoading)
   const dispatch = useAppDispatch();
 
@@ -18,11 +18,7 @@ export const App=()=> {
       dispatch(authMe());
   }, [dispatch]);
 
-  if (isInitialized) {
-    return <div >
-        <Preloader/>
-    </div>
-}
+ 
   return(
     <div>
     <Header/>

@@ -1,5 +1,5 @@
 import { Input } from 'antd'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useCallback, useState } from 'react'
 import { useAppSelector } from '../../store/store'
 
 
@@ -14,16 +14,8 @@ export const EditableSpan = React.memo(
   ({ title, changeTitle, editMode, setEditMode }: EditableSpanPropsType) => {
    const userName = useAppSelector((state) => state.profile.name)
 
-    let [localTitle, setLocalTitle] = useState(userName)
-
-    const activateEditMode = () => {
-      changeTitle(localTitle)
-      setEditMode(false)
-    }
-    const activateViewMode = () => {
-      changeTitle(localTitle)
-      setEditMode(false)
-    }
+    let [localTitle, setLocalTitle] = useState<string>(userName)   
+    
 
     const onChangeTitleClick = (e: ChangeEvent<HTMLInputElement>) => {
       setLocalTitle(e.currentTarget.value)
@@ -33,6 +25,10 @@ export const EditableSpan = React.memo(
             activateViewMode()
         }
     }
+     const activateViewMode = useCallback(() => {
+        changeTitle(localTitle)
+        setEditMode(false)
+    }, [changeTitle, localTitle])
 
     return editMode ? (
       <Input
@@ -43,7 +39,7 @@ export const EditableSpan = React.memo(
         onBlur={activateViewMode}
       />
     ) : (
-      <span onDoubleClick={activateEditMode}>{title}</span>
+      <span>{title}</span>
     )
   }
 )

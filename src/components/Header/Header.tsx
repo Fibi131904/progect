@@ -1,59 +1,36 @@
 import React from 'react'
-import { useSelector } from "react-redux"
-import { AppStateType, useAppDispatch} from "../../store/store"
+import {  useAppDispatch } from '../../store/store'
+import s from './Header.module.css'
+import { logoutTC } from '../Auth/Login/LoginBLL/login-reducer'
+import userPhoto from '../../assets/images/userPhoto.jpg'
 import {NavLink} from 'react-router-dom';
-import { PATH } from '../../app/RoutesPage';
-import s from './Header.module.css';
-import { logoutTC } from '../Auth/Login/LoginBLL/login-reducer';
-
-
-
 
 export const Header = () => {
-
   const dispatch = useAppDispatch()
-  const isLoggedIn  = useSelector<AppStateType, boolean>(
-    (state) => state.login.isLoggedIn
-  )
-const logOut=()=>{
-dispatch(logoutTC())
-}
+
+  const logOut = () => {
+    dispatch(logoutTC())
+  }
   return (
-    <nav className={s.links}>
-        <NavLink to={PATH.PROFILE}
-               >
-            Profile
-        </NavLink>
-        {
-            isLoggedIn &&
-            <>
-              {/* <NavLink to={PATH.PACKS}
-                       className={({isActive}) => isActive ? s.active : s.nav}>
-                Packs List
-              </NavLink> */}
-              <span onClick={logOut} className={s.nav}>
-                Log Out
-              </span>
-            </>
-        }
-        {
-            !isLoggedIn &&
-            <>
-              <NavLink to={PATH.REGISTRATION}
-                     >
-                Registration
-              </NavLink>
-              {/* <NavLink to={PATH.PASSWORD_RECOVERY}
-                       className={({isActive}) => isActive ? s.active : s.nav}>
-                Password recovery
-              </NavLink> */}
-              <NavLink to={PATH.LOGIN}
-                      >
-                Log In
-              </NavLink>
-            </>
-        }
-       
-    </nav>
-)
+    <div className={s.wrapper}>
+      <div className={s.container}>
+        <div className={s.itemForm}>
+        <NavLink to={'/packs'} >
+                        <img  className={s.packList} alt={'Packs list icon'}/>
+                        <span>Packs list</span>
+                    </NavLink>
+        
+        </div>
+        
+        <NavLink to={'/profile'} >
+                        <img src={userPhoto}className={s.profile} alt={'Profile icon'}/>
+                        <span>Profile</span>
+                    </NavLink>
+
+        <span onClick={logOut} className={s.nav}>
+          Log Out
+        </span>
+      </div>
+    </div>
+  )
 }

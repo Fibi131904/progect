@@ -24,7 +24,7 @@ export const profileReducer=(state:  UserDataType= profileInitialState, action:P
 
 }
 export const profileActions={
-  setUserData: (user: UserDataType) => ({type: 'profile/SET_USER_DATA', payload: {user}} as const),
+  setUserData: (userData: UserDataType) => ({type: 'profile/SET_USER_DATA', payload: {userData}} as const),
   setIsInitialized: (isInitialized: boolean) => ({type: 'profile/SET_IS_INITIALIZED', payload: {isInitialized}} as const)
 }
 
@@ -47,8 +47,6 @@ export const authMe = ():AppThunk=>(dispatch)=>{
   profileAPI.me()
   
   .then((res)=>{
-
- console.log(res.data)
       dispatch(appActions.setAppIsLoading(true))
       dispatch(profileActions.setUserData(res.data))
 

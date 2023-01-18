@@ -9,6 +9,9 @@ import {  updateUserDataTC } from "../ProfileBLL/profile-reducer"
 import {Navigate} from 'react-router-dom';
 import { logoutTC } from "../../Auth/Login/LoginBLL/login-reducer"
 import { PATH } from "../../../app/RoutesPage"
+import { Header } from "../../Header/Header"
+
+
 
 type ProfileType = {
   title?: string
@@ -31,6 +34,8 @@ export const Profile:React.FC<ProfileType>=({disabled})=>{
   const [editMode, setEditMode] = useState<boolean>(false)
   const dispatch = useAppDispatch()
 
+
+
   const activateEditMode = () => {
     if (disabled) {
       return
@@ -39,16 +44,9 @@ export const Profile:React.FC<ProfileType>=({disabled})=>{
     }
   }
   const changeUserName = (name: string) => {
-    dispatch(
-      updateUserDataTC({
-        name: name,
-        avatar: userAvatar,
-        _id: userId,
-        publicCardPacksCount,
-        email,
-      })
-    )
+    dispatch(updateUserDataTC({name: name, avatar: userAvatar, _id: userId, publicCardPacksCount, email}))
 }
+
 
 const handleLogout = () => {
   dispatch(logoutTC())
@@ -60,6 +58,9 @@ if (!isLoggedIn) {
 
   return (
     <div className={s.container}>
+     
+     <Header/>
+
       <div className={s.form}>
         <h3>Personal Information</h3>
         <div >
