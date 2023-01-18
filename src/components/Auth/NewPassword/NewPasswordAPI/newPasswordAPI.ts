@@ -6,7 +6,7 @@ import { instance } from "../../../../api/instance"
 export const createNewPasswopdAPI = {
   sendNewPasswopd(newPasswordData: NewPasswordType)
   {
-    return instance.post<NewPasswordType, AxiosResponse<ResponseType>>(`/auth/set-new-password`, newPasswordData)
+    return instance.post<NewPasswordType, AxiosResponse<ResponseType>>(`auth/set-new-password`, newPasswordData)
   }
 }
 

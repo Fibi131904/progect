@@ -41,14 +41,15 @@ export const Login = () => {
       name="basic"
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
-      initialValues={{ remember: false }}
+      initialValues={{ rememberMe: false , email: '',
+      password: '',}}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="on"
     >
       <Form.Item
-        label="Username"
-        name="username"
+        label="Email"
+        name="email"
         rules={[{ required: true, message: 'Please input your username!' }]}
       >
         <Input />
@@ -62,7 +63,7 @@ export const Login = () => {
         <Input.Password />
       </Form.Item>
 
-      <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+      <Form.Item name="rememberMe" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
         <Checkbox>Remember me</Checkbox>
       </Form.Item>
 

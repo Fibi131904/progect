@@ -12,7 +12,7 @@ type EditableSpanPropsType = {
 
 export const EditableSpan = React.memo(
   ({ title, changeTitle, editMode, setEditMode }: EditableSpanPropsType) => {
-   const userName = useAppSelector((state) => state.profile.user.name)
+   const userName = useAppSelector((state) => state.profile.name)
 
     let [localTitle, setLocalTitle] = useState(userName)
 

@@ -1,8 +1,10 @@
 import axios from "axios"
 import { appActions } from "../../../../app/app-reducer"
 import { AppThunk, InferActionTypes } from "../../../../store/store"
+import { errorUtils } from "../../../../utils/error-utils"
 import { profileActions } from "../../../Profile/ProfileBLL/profile-reducer"
 import { loginAPI, LoginType } from "../LoginAPI/loginAPI"
+import { AxiosError } from "axios"
 
 
 const loginInitialState={
@@ -30,26 +32,22 @@ export const loginActions = {
       ({type: 'LOGIN/SET-LOGIN', payload: {isLoading}} as const),
 }
 
-export const loginTC = (data: LoginType): AppThunk => async (dispatch )=> {
+ 
+
+export const loginTC = (data: LoginType): AppThunk => (dispatch) => {
     dispatch(appActions.setAppStatus('loading'))
-  try {
-
-      let res = await loginAPI.login(data)
-      if(res.data){
-
-      dispatch(loginActions.setIsLoggedIn(true))
-      dispatch(profileActions.setUserData(res.data))
-      }
-  } catch (e) {
-      if (axios.isAxiosError(e)) {
-          dispatch(loginActions.setLoginError(e.response ? e.response.data.error : e.message))
-      } else {
-          dispatch(loginActions.setLoginError('Some error occurred'))
-      }
-  } finally {
-     
-      dispatch(appActions.setAppStatus('succeeded'))
-  }
+    loginAPI.login(data)
+        .then((res) => {
+            dispatch(loginActions.setIsLoggedIn(true))
+            console.log(res.data)
+             dispatch(profileActions.setUserData(res.data))
+        })
+        .catch((error: AxiosError<{ error: string }>) => {
+            errorUtils(error, dispatch)
+        })
+        .finally(() => {
+            dispatch(appActions.setAppStatus('succeeded'))
+        })
 }
 
 export const logoutTC = (): AppThunk => async dispatch => {

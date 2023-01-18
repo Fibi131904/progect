@@ -20,11 +20,11 @@ type ProfileType = {
 
 export const Profile:React.FC<ProfileType>=({disabled})=>{
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn)
-  const userName = useAppSelector(state => state.profile.user.name)
-  const userAvatar = useAppSelector(state => state.profile.user.avatar)
-  const userId = useAppSelector(state => state.profile.user._id)
-  const email = useAppSelector(state => state.profile.user.email)
-  const publicCardPacksCount = useAppSelector(state => state.profile.user.publicCardPacksCount)
+  const userName = useAppSelector(state => state.profile.name)
+  const userAvatar = useAppSelector(state => state.profile.avatar)
+  const userId = useAppSelector(state => state.profile._id)
+  const email = useAppSelector(state => state.profile.email)
+  const publicCardPacksCount = useAppSelector(state => state.profile.publicCardPacksCount)
 
 
 
