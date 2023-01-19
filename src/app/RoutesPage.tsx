@@ -5,7 +5,7 @@ import { NewPassword } from '../components/Auth/NewPassword/NewPasswordUI/NewPas
 import { Recovery } from '../components/Auth/Recovery/Recovery'
 import { CheckEmail } from '../components/Auth/Recovery/RecoveryUI/CheckEmail'
 import { Registration } from '../components/Auth/Registration/RegistrationUI/Registration'
-import { Packs } from '../components/Packs/PacksTable/PacksUI/PacksTable/Packs'
+import { Packs } from '../components/Packs/Packs'
 import { Profile } from '../components/Profile/ProfileUI/Profile'
 
 

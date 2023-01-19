@@ -30,7 +30,7 @@ const tailFormItemLayout = {
 
 export const NewPassword: React.FC = () => {
   const isPassChanged = useAppSelector(
-    (state) => state.NewPassword.isPassChanged
+    (state) => state.newPassword.isPassChanged
   )
   const dispatch = useAppDispatch()
   const [form] = Form.useForm()

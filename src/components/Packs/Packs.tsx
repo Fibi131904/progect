@@ -1,7 +1,7 @@
-import { Header } from "../../../../Header/Header"
-import { PacksTable } from "./PacksTable"
+import { Header } from "../Header/Header"
+import { PacksTable } from "./PacksTable/PacksTable"
 import {Navigate, useNavigate} from 'react-router-dom';
-import { useAppSelector } from "../../../../../store/store";
+import { useAppSelector } from "../../store/store";
 
 
 export const Packs = () => {

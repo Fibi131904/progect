@@ -7,6 +7,7 @@ import { RegistrationActionTypes, registrationReducer } from '../components/Auth
 import { ProfileActionTypes, profileReducer } from '../components/Profile/ProfileBLL/profile-reducer';
 import { RecoveryActionTypes, recoveryReducer } from '../components/Auth/Recovery/RecoveryBLL/recovery-reducer';
 import { NewPasswordActionTypes, newPasswordReducer } from '../components/Auth/NewPassword/NewPasswordBLL/newPassword-reducer';
+import { PacksActionTypes, packsReducer } from '../components/Packs/PacksBLL/packs-reducer';
 
 
 export type AppStateType = ReturnType<typeof rootReducer>
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   registration: registrationReducer,
   profile: profileReducer,
   recoverPassword: recoveryReducer,
-  NewPassword: newPasswordReducer,
+  newPassword: newPasswordReducer,
+  packs: packsReducer,
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
@@ -35,6 +37,7 @@ export type AppActionsType = LoginActionsType
  | ProfileActionTypes
  | RecoveryActionTypes
  | NewPasswordActionTypes
+ | PacksActionTypes
 
 
 export type AppDispatch = ThunkDispatch<RootStateType, unknown, AnyAction>
