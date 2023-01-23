@@ -43,6 +43,7 @@ export const getPacksTC = (): AppThunk => (dispatch, getState) => {
   packsAPI.getPacks(params)
         .then((res) => {
             dispatch(packsActions.getPacks(res.data.cardPacks))
+        console.log(res.data.cardPacks)
            
         })
         .catch((error: AxiosError<{ error: string }>) => {
