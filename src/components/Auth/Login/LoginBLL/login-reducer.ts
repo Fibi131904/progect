@@ -34,20 +34,20 @@ export const loginActions = {
 
  
 
-export const loginTC = (data: LoginType): AppThunk => (dispatch) => {
+export const loginTC = (login: LoginType): AppThunk =>async (dispatch) => {
     dispatch(appActions.setAppStatus('loading'))
-    loginAPI.login(data)
-        .then((res) => {
+    try{
+        const res= await loginAPI.login(login)
             dispatch(loginActions.setIsLoggedIn(true))
-            console.log(res.data)
-             dispatch(profileActions.setUserData(res.data))
-        })
-        .catch((error: AxiosError<{ error: string }>) => {
+            //@ts-ignore
+            dispatch(profileActions.setUserData(res))
+        }
+        catch(error: any | AxiosError<{ error: string; }, any>) {
             errorUtils(error, dispatch)
-        })
-        .finally(() => {
+        }
+        finally{
             dispatch(appActions.setAppStatus('succeeded'))
-        })
+        }
 }
 
 export const logoutTC = (): AppThunk => async dispatch => {

@@ -1,45 +1,49 @@
 import { Input } from 'antd'
-import React, { ChangeEvent, useCallback, useState } from 'react'
-import { useAppSelector } from '../../store/store'
+import React, { ChangeEvent, useState } from 'react'
 
 
 type EditableSpanPropsType = {
-  title: string
-  changeTitle: (title: string) => void
-  setEditMode: (editMode: boolean) => void
-  editMode: boolean
+  value: string
+  callBack: (newValue: string) => void
 }
 
-export const EditableSpan = React.memo(
-  ({ title, changeTitle, editMode, setEditMode }: EditableSpanPropsType) => {
-   const userName = useAppSelector((state) => state.profile.name)
+export const EditableSpan = ({
+  callBack,
+  value,
+}: EditableSpanPropsType) => {
+  const [editMode, setEditMode] = useState<boolean>(false)
+  const [title, setTitle] = useState(value)
+  
 
-    let [localTitle, setLocalTitle] = useState<string>(userName)   
-    
-
-    const onChangeTitleClick = (e: ChangeEvent<HTMLInputElement>) => {
-      setLocalTitle(e.currentTarget.value)
+  const onKeyPressClick = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      activateViewMode()
     }
-    const onKeyPressClick = (e: React.KeyboardEvent<HTMLDivElement>) => {
-        if (e.key === 'Enter') {
-            activateViewMode()
-        }
-    }
-     const activateViewMode = useCallback(() => {
-        changeTitle(localTitle)
-        setEditMode(false)
-    }, [changeTitle, localTitle])
-
-    return editMode ? (
-      <Input
-        onKeyDown={onKeyPressClick}
-        value={localTitle}
-        onChange={onChangeTitleClick}
-        autoFocus
-        onBlur={activateViewMode}
-      />
-    ) : (
-      <span>{title}</span>
-    )
   }
-)
+
+  const activateEditMode = () => {
+    setEditMode(true)
+    setTitle(value);
+  }
+
+  const activateViewMode = () => {
+    callBack(title)
+    setEditMode(false)
+  
+  }
+  const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.currentTarget.value)
+  }
+
+  return (
+     editMode ?
+    <Input
+      onKeyDown={onKeyPressClick}
+      value={title}
+      onChange={changeTitle}
+      autoFocus
+      onBlur={activateViewMode}
+    />
+   : <span onDoubleClick={activateEditMode}>{value}</span>
+  )  
+}

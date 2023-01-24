@@ -4,7 +4,7 @@ import { UserDataType } from '../../../Profile/ProfileBLL/profile-reducer';
 
 export const loginAPI = {
     login(login: LoginType) {
-        return instance.post<any, AxiosResponse<UserDataType>, LoginType>(`auth/login`, login)
+        return instance.post<any, AxiosResponse<UserDataType>, LoginType>(`auth/login`, login).then(res=>res.data)
     },
   logout()
   {
