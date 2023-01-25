@@ -1,13 +1,12 @@
-import { packsAPI } from './../PacksAPI/PacksAPI';
+import { CardPacksType, packsAPI } from './../PacksAPI/PacksAPI';
 import { appActions } from "../../../app/app-reducer"
 import { AppThunk, InferActionTypes } from "../../../store/store"
-import { PackType } from "../PacksAPI/PacksAPI"
-import {AxiosError} from 'axios';
+import { AxiosError } from 'axios';
 import { errorUtils } from "../../../utils/error-utils"
 
 
-const packsInitialState={
-  cardPacks: [] as PackType[],
+const packsInitialState = {
+  cardPacks: [] as CardPacksType[],
   params: {
     packName: '',
     min: 0,
@@ -16,49 +15,52 @@ const packsInitialState={
     page: 1,
     pageCount: 10,
     user_id: '',
-} as PacksParamsType,
-  
+  } as PacksParamsType,
+
 }
 
-export const packsReducer=(state:PacksInitialStateType=packsInitialState, action: PacksActionTypes):PacksInitialStateType=>{
-  switch(action.type){
+export const packsReducer = (state: PacksInitialStateType = packsInitialState, action: PacksActionTypes): PacksInitialStateType =>
+{
+  switch (action.type)
+  {
     case 'PACKS/SET-PACKS':
-    
-          return {...state, ...action.payload}
-      default:
-          return state 
+
+      return { ...state, ...action.payload }
+    default:
+      return state
   }
 }
 export const packsActions = {
-  getPacks: (packs: PackType[]) =>
-      ({type: 'PACKS/SET-PACKS', payload: {packs}} as const),
- 
-}
+  getPacks: (packs: CardPacksType[]) =>
+    ({ type: 'PACKS/SET-PACKS', payload: { packs } } as const),
 
- 
-
-export const getPacksTC = (): AppThunk => (dispatch, getState) => {
- const params=getState().packs.params
-    dispatch(appActions.setAppStatus('loading'))
-  packsAPI.getPacks(params)
-        .then((res) => {
-            dispatch(packsActions.getPacks(res.data.cardPacks))
-        console.log(res.data.cardPacks)
-           
-        })
-        .catch((error: AxiosError<{ error: string }>) => {
-            errorUtils(error, dispatch)
-        })
-        .finally(() => {
-            dispatch(appActions.setAppStatus('succeeded'))
-        })
 }
 
 
 
+export const getPacksTC = (): AppThunk => async (dispatch, getState) =>
+{
+  const params = getState().packs.params
+
+  dispatch(appActions.setAppStatus('loading'))
+  try
+  {
+    const data = await packsAPI.getPacks(params)
+    dispatch(packsActions.getPacks(data.data.cardPacks))
+  }
+
+  catch (error: any | AxiosError<{ error: string; }, any>)
+  {
+    errorUtils(error, dispatch)
+  }
+  finally
+  {
+    dispatch(appActions.setAppStatus('succeeded'))
+  }
+}
 
 
-export type PacksInitialStateType=typeof packsInitialState
+export type PacksInitialStateType = typeof packsInitialState
 export type PacksActionTypes = InferActionTypes<typeof packsActions>
 export type PacksParamsType = {
   packName: string
