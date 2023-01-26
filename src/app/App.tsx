@@ -1,8 +1,8 @@
-import { Header } from 'antd/es/layout/layout';
+
 import React, { useEffect } from 'react';
 import { Preloader } from '../common/preloader/Preloader';
+import { Header } from '../components/Header/Header';
 import { authMe } from '../components/Profile/ProfileBLL/profile-reducer';
-import { Profile } from '../components/Profile/ProfileUI/Profile';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { RoutesPage } from './RoutesPage';
 
@@ -22,6 +22,7 @@ export const App=()=> {
   return(
     <div>
     <Header/>
+   
  
     {isLoading && <div ><Preloader/></div>}
     <RoutesPage/>

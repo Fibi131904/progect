@@ -48,6 +48,7 @@ export const authMe = ():AppThunk=>(dispatch)=>{
   .then((res)=>{
        dispatch(profileActions.setUserData(res.data))
        dispatch(appActions.setAppIsLoading(true))
+       
   })
   .finally(() => {
       dispatch(appActions.setInitialized(true))

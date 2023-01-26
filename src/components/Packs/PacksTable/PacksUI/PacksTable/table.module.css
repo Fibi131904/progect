@@ -1,0 +1,18 @@
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.table {
+  width: 100%;
+  font-size: 16px;
+   border-collapse: collapse; 
+  text-align: center;
+  border-radius: 20px;
+  margin-bottom: 50px;
+}
+
+.table th, td {
+  padding: 7px 7px;
+  border: solid 2px #767676;
+}

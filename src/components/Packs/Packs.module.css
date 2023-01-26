@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #F9F9FA;
+   margin-top: 100px;
+}
+
+.title {
+  position: absolute;
+  width: 107px;
+  height: 27px;
+  left: 136px;
+  top: 99px;
+  color: rgb(52, 49, 49);
+
+}

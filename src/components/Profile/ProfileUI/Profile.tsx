@@ -31,10 +31,8 @@ export const Profile: React.FC<ProfileType> = () => {
   const dispatch = useAppDispatch()
 
   const changeUserName = useCallback((name: string) => {
-    console.log(name)
-    dispatch(
-      updateProfile(name)
-       
+      dispatch(
+      updateProfile(name)     
       
     )
   },[])

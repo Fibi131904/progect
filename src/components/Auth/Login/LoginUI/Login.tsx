@@ -17,7 +17,7 @@ export const Login = () => {
   const dispatch = useAppDispatch()
   const onFinish = (values: any) => {
     dispatch(loginTC(values))
-    console.log(values)
+
   };
 
   const onFinishFailed = (errorInfo: any) => {

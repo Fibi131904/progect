@@ -4,7 +4,7 @@ import {AxiosResponse} from 'axios';
 export const packsAPI = {
 
   getPacks(params: RequestGetPacksType) {
-    return instance.get<RequestGetPacksType, AxiosResponse<ResponseCardPacksType>>('/cards/pack', {params});
+    return instance.get<RequestGetPacksType, AxiosResponse<ResponseCardPacksType>>('/cards/pack', {params}).then(res=>res.data);
 },
 
 addPacks() {
