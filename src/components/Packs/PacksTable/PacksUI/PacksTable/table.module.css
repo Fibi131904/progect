@@ -12,8 +12,18 @@
   border-radius: 20px;
   margin-bottom: 50px;
 }
-
+.tableThead{
+  background: #EFEFEF;
+}
+.triangle {
+  display: flex;
+  flex-direction: column;
+  margin: -10px 5px;
+  width: 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
 .table th, td {
   padding: 7px 7px;
-  border: solid 2px #767676;
+  border: solid 1px#D9D9D9;
 }
