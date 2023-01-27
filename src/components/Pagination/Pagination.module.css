@@ -1,0 +1,61 @@
+.paginator {
+    display: flex;
+    margin: 10px;
+}
+
+.paginatorNumbers {
+    display: flex;
+    justify-content: space-around;
+    width: 500px;
+}
+
+.pageNumber {
+    font-size: 12px;
+    padding-top: 5px;
+    cursor: pointer;
+    color: #484545;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+
+}
+
+.selectedPage {
+    font-weight: bold;
+    border: 1px solid#1e1c1c;
+    border-radius: 5px;
+    background: #0389c9;
+}
+
+.button {
+    border: none;
+    background: none;
+    transition: transform .2s;
+    
+
+
+
+}
+
+button:hover {
+    color: rgb(149, 61, 222);
+    transform: scale(1.5);
+}
+
+i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+
+.arrowRight {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.arrowLeft {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}

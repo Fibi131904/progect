@@ -20,6 +20,7 @@ const packsInitialState = {
     user_id: '',
   } as PacksParamsType,
   cardPacksTotalCount: 0,
+
 }
 
 export const packsReducer = (state: PacksInitialStateType = packsInitialState, action: PacksActionTypes): PacksInitialStateType =>

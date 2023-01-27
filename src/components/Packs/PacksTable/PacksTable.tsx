@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { getPacksTC } from '../PacksBLL/packs-reducer';
+import { Pagination } from '../../Pagination/Pagination';
+import { getPacksTC, packsActions } from '../PacksBLL/packs-reducer';
 import { PacksList } from './PacksUI/PackList/PacksList';
 import s from './PacksUI/PacksTable/table.module.css'
 
@@ -21,6 +22,7 @@ export const PacksTable=()=>{
   const cardPacksTotalCount= useAppSelector (state => state.packs.cardPacksTotalCount)
   const page = useAppSelector(state => state.packs.params.page)
   const pageCount = useAppSelector(state => state.packs.params.pageCount)
+ 
 
 
 
@@ -28,8 +30,14 @@ export const PacksTable=()=>{
  
     dispatch(getPacksTC())
 
+   
+
 }, [dispatch, packName, user_id, sortPacks, min, max, pageCount])
 
+const onPageChanged=(page:number)=>{
+  dispatch(packsActions.setCurrentPage(page))
+  dispatch(getPacksTC())
+}
 
   return <div className={s.tableContainer}>
  <table className={s.table}>
@@ -72,13 +80,18 @@ export const PacksTable=()=>{
  <PacksList cardPacks={cardPacks}/>
        
 
-  {/* <tr>
+  <tr>
    <td  colSpan={5}>
      <div>
-    Paginator
+    <Pagination
+       pageCount={pageCount}
+       cardPacksTotalCount={cardPacksTotalCount}
+       page={page}
+       onPageChanged={onPageChanged}
+      />
     </div>
     </td>
-  </tr> */}
+  </tr>
  </tbody>
 </table>
 </div>

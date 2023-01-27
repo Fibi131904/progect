@@ -6,18 +6,19 @@ import s from './Packs.module.css'
 
 
 export const Packs = () => {
-  const navigate = useNavigate()
+
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn)
 
-  
-  
 
 if (!isLoggedIn) {
     return <Navigate to={'/login'}/>
 }
   return (
-    <div className={s.wrapper}>
-      <Header />
+    <div className={s.wrapper}>  
+      <div className={s.header}>
+        
+        </div>  
+     
        <div className={s.title}>Packs List</div>
       <PacksTable />
     </div>

@@ -16,7 +16,7 @@ export const Header = () => {
       <div className={s.container}>
         <div className={s.itemForm}>
         <NavLink to={'/packs'} >
-                        <img  className={s.packList} alt={'Packs list icon'}/>
+                      
                         <span>Packs list</span>
                     </NavLink>
         
