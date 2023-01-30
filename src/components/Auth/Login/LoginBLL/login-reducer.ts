@@ -8,7 +8,7 @@ import { AxiosError } from "axios"
 
 
 const loginInitialState={
-  isLoggedIn: true,
+  isLoggedIn: false,
       error: '',
   
 }
