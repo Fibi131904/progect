@@ -7,9 +7,7 @@ export const profileAPI = {
   update(name: string) {
     return instance.put<any, AxiosResponse<ResponseUpdateType>, {name: string}>('auth/me', {name})
 },
-me() {
-  return instance.post('auth/me', {})
-},
+
 };
 
 type ResponseUpdateType = {

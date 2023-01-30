@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import { EditableSpan } from '../../../common/super-components/EditableSpan'
 import s from '../../../styles/Auth.module.css'
-import userPhoto from '../../../assets/images/userPhoto.jpg'
+import myFoto from '../../../assets/images/myFoto.webp'
 import { EditOutlined } from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '../../../store/store'
 import { updateProfile } from '../ProfileBLL/profile-reducer'
@@ -52,7 +52,7 @@ export const Profile: React.FC<ProfileType> = () => {
       <div className={s.form}>
         <h3>Personal Information</h3>
         <div>
-          <img className={s.imgEmail} src={userPhoto} alt={'Repsonal img'} />
+          <img className={s.imgUser} src={myFoto} alt={'Repsonal img'} />
           <div className={s.userNickName}>
             <EditableSpan value={userName} callBack={changeUserName} />
 
@@ -67,7 +67,7 @@ export const Profile: React.FC<ProfileType> = () => {
               <b>Card Packs: </b> {publicCardPacksCount}
             </div>
           </div>
-          <Button color={'primary'} onClick={handleLogout} className={s.btn}>
+          <Button color={'primary'} onClick={handleLogout} className={s.btn} size='small'>
             Logout
           </Button>
         </div>

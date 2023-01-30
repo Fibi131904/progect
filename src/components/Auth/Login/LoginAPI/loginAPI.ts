@@ -10,7 +10,9 @@ export const loginAPI = {
   {
     return instance.delete(`auth/me`)
   },
-  
+  me() {
+    return instance.post('auth/me', {})
+  },
 }
 
 export type LoginType = {

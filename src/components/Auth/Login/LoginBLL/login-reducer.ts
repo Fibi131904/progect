@@ -7,8 +7,10 @@ import { loginAPI, LoginType } from "../LoginAPI/loginAPI"
 import { AxiosError } from "axios"
 
 
+
 const loginInitialState={
   isLoggedIn: false,
+  isInitialized: false,
       error: '',
   
 }
@@ -17,7 +19,7 @@ export const loginReducer=(state:LoginInitialStateType=loginInitialState, action
   switch(action.type){
     case 'LOGIN/SET-IS-LOGGED-IN':
       case 'LOGIN/SET-ERROR':
-      case 'LOGIN/SET-LOGIN':
+      case 'LOGIN/SET-IS-INITIALIZED':
           return {...state, ...action.payload}
       default:
           return state 
@@ -28,8 +30,7 @@ export const loginActions = {
       ({type: 'LOGIN/SET-IS-LOGGED-IN', payload: {isLoggedIn}} as const),
   setLoginError: (error: string) =>
       ({type: 'LOGIN/SET-ERROR', payload: {error}} as const),
-  setIsLoading: (isLoading: boolean) =>
-      ({type: 'LOGIN/SET-LOGIN', payload: {isLoading}} as const),
+ setAppInitializedAC :(value: boolean) => ({type: 'LOGIN/SET-IS-INITIALIZED',payload:{ value}} as const),
 }
 
  
@@ -63,6 +64,21 @@ export const logoutTC = (): AppThunk => async dispatch => {
       }
   }
 }
+export const authMe = ():AppThunk=>(dispatch)=>{
+  
+    loginAPI.me()
+    
+    .then((res)=>{
+        dispatch(loginActions.setIsLoggedIn(true))
+         dispatch(profileActions.setUserData(res.data))    
+         
+    })
+    .finally(() => {
+      
+        dispatch(appActions.setInitialized(true))
+    })
+  }
+  
 
 
 

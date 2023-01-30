@@ -3,11 +3,11 @@ import { Progress } from 'antd'
 
 export const Preloader = () => {
   return (
-    <>
-      <Progress
+    <div>
+      <Progress 
         percent={99.9}
         strokeColor={{ '0%': '#108ee9', '100%': '#87d068' }}
       />
-    </>
+    </div>
   )
 }

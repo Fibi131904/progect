@@ -41,20 +41,6 @@ export const updateProfile =  (name: string): AppThunk => async (dispatch) =>
 }
 
 
-export const authMe = ():AppThunk=>(dispatch)=>{
-  dispatch(appActions.setAppStatus('loading'))
-  profileAPI.me()
-  
-  .then((res)=>{
-       dispatch(profileActions.setUserData(res.data))
-       dispatch(appActions.setAppIsLoading(true))
-       
-  })
-  .finally(() => {
-      dispatch(appActions.setInitialized(true))
-      dispatch(appActions.setAppStatus('succeeded'))
-  })
-}
 
 
 export type ProfileStateType = typeof profileInitialState
