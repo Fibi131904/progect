@@ -6,7 +6,7 @@ import s from './Packs.module.css'
 import { SearchForm } from '../SearchForm/SearchForm'
 import { ChangeEvent, useState } from 'react'
 import { packsActions } from './PacksBLL/packs-reducer'
-import { Radio, Slider } from 'antd'
+import { Button, Radio, Slider } from 'antd'
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
@@ -34,10 +34,14 @@ export const Packs = () => {
   const handleChange = (newValue: [number, number]) => {
     setValue(newValue)
   }
-  
+
   const onAfterChangeHandler = (value: [number, number]) => {
     dispatch(packsActions.setMinMaxAC(value))
   }
+const filterOffHandler=()=>{
+  setValue([0, 110]);
+  dispatch(packsActions.setMinMaxAC([0, 110]))
+}
 
   if (!isLoggedIn) {
     return <Navigate to={'/login'} />
@@ -84,7 +88,7 @@ export const Packs = () => {
             range={true}
           />
         </div>
-        <div>-filter reset </div>
+        <div><Button  onClick={filterOffHandler}>filter reset</Button> </div>
       </div>
 
       <div className={s.title}>Packs List</div>
