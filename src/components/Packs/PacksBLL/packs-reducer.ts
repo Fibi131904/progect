@@ -9,7 +9,7 @@ const packsInitialState = {
   cardPacks: [] as CardPacksType[],
   minCardsCount: 0,
   maxCardsCount: 103,
-  packsType: 'All' as PacksType,
+  isMyPack: false,
   params: {
     packName: '',
     min: 0,
@@ -30,16 +30,16 @@ export const packsReducer = (state: PacksInitialStateType = packsInitialState, a
     case 'PACKS/SET_CARD_PACKS_TOTAL_COUNT':
     case 'PACKS/SET_PACKS_MIN_CARDS_COUNT':
     case 'PACKS/SET_PACKS_MAX_CARDS_COUNT':
-    case 'PACKS/SET_PACKS_TYPE':
+    case 'PACKS/SET-MY-ALL-PACK':
         return {...state, ...action.payload}
     case 'PACKS/SET_CURRENT_PAGE':
     case 'PACKS/SET_TITLE_FOR_SEARCH':
     case 'PACKS/SET_PACKS_FOR_USER':
-    case 'PACKS/SET_SORT_PARAMETERS':
-    case 'PACKS/SET_PACKS_MIN':
-    case 'PACKS/SET_PACKS_MAX':
+    case 'PACKS/SET_SORT_PARAMETERS': 
     case 'PACKS/SET_PACKS_PAGE_COUNT':
         return {...state, params: {...state.params, ...action.payload}}
+        case 'PACKS/SET-MIN-MAX':
+          return {...state, params:{...state.params,min: action.payload.value[0], max: action.payload.value[1]}}
     default:
         return state
 }
@@ -49,8 +49,7 @@ export const packsActions = {
       ({type: 'PACKS/SET_PACKS', payload: { cardPacks}} as const),
   setPacksForUser: (user_id: string) =>
       ({type: 'PACKS/SET_PACKS_FOR_USER', payload: {user_id}} as const),
-  setPacksMin: (min: number) => ({type: 'PACKS/SET_PACKS_MIN', payload: {min}} as const),
-  setPacksMax: (max: number) => ({type: 'PACKS/SET_PACKS_MAX', payload: {max}} as const),
+  setMinMaxAC : (value: Array<number>) => ({type: 'PACKS/SET-MIN-MAX',payload:{ value}} as const),
   setCardPacksTotalCount: (cardPacksTotalCount: number) =>
       ({type: 'PACKS/SET_CARD_PACKS_TOTAL_COUNT', payload: {cardPacksTotalCount}} as const),
   setCurrentPage: (page: number) =>
@@ -65,8 +64,7 @@ export const packsActions = {
       ({type: 'PACKS/SET_PACKS_MAX_CARDS_COUNT', payload: {maxCardsCount}} as const),
   setPacksPageCount: (pageCount: number) =>
       ({type: 'PACKS/SET_PACKS_PAGE_COUNT', payload: {pageCount}} as const),
-  setPacksType: (packsType: PacksType)=>
-      ({type: 'PACKS/SET_PACKS_TYPE', payload: {packsType}} as const),
+  setMyAllPacksAC: (isMyPack: boolean) => ({type: 'PACKS/SET-MY-ALL-PACK',payload:{isMyPack}} as const)
 }
 
 
@@ -108,4 +106,4 @@ export type PacksParamsType = {
   user_id: string
 }
 
-export type PacksType = 'All' | 'My'
+
