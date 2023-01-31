@@ -48,11 +48,15 @@ export const Packs = () => {
   }
   return (
     <div className={s.wrapper}>
-      <div className={s.container}>
+     
+
       <div className={s.titleBlock}>
-        <div>Packs List</div>
-        <SuperButton>Add new pack</SuperButton>
+        <div>
+          Packs List
+        </div>
+        <Button>Add new pack</Button>
       </div>
+
       <div className={s.settings}>
         <div>
           <div>Search </div>
@@ -88,11 +92,11 @@ export const Packs = () => {
         </div>
 
         <div className={s.btnFilterReset}>
-          <Button onClick={filterOffHandler}>filter reset</Button>{' '}
+          <Button onClick={filterOffHandler}>filter reset</Button>
         </div>
       </div>
       <PacksTable />
     </div>
-    </div>
+   
   )
 }

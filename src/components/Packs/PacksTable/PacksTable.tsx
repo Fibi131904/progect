@@ -79,14 +79,14 @@ export const PacksTable = () => {
          
         </tbody>
       </table>
-      <div>
+     
                 <Pagination
                   pageCount={pageCount}
                   cardPacksTotalCount={cardPacksTotalCount}
                   page={page}
                   onPageChanged={onPageChanged}
                 />
-              </div>
+             
     </div>
   )
 }

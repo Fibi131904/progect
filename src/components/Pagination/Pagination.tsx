@@ -9,7 +9,7 @@ type PropsType = {
   onPageChanged: (pageNumber: number) => void
 }
 
-export const Pagination: React.FC<PropsType> = memo((props) => {
+export const Pagination: React.FC<PropsType> = (props) => {
   let pagesCount = Math.ceil(props.cardPacksTotalCount / props.pageCount)
 
   let pages: Array<number> = []
@@ -68,4 +68,4 @@ export const Pagination: React.FC<PropsType> = memo((props) => {
       )}
     </div>
   )
-})
+}

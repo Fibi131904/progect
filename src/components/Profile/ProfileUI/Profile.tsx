@@ -9,7 +9,8 @@ import { logoutTC } from '../../Auth/Login/LoginBLL/login-reducer'
 import { PATH } from '../../../app/RoutesPage'
 import { Header } from '../../Header/Header'
 import { useCallback } from 'react'
-import { SuperButton } from '../../../common/super-components/SuperButton/SuperButton'
+import { Button } from 'antd'
+
 
 type ProfileType = {
   title?: string
@@ -36,7 +37,7 @@ export const Profile: React.FC<ProfileType> = () => {
 
   const handleLogout = () => {
     dispatch(logoutTC())
-  }
+   }
 
   if (!isLoggedIn) {
     return <Navigate to={PATH.LOGIN} />
@@ -50,21 +51,23 @@ export const Profile: React.FC<ProfileType> = () => {
         <h3>Personal Information</h3>
         <div>
           <img className={s.imgUser} src={myFoto} alt={'Repsonal img'} />
+          
+          <div className={s.infoBlock}>
           <div className={s.userNickName}>
             <EditableSpan value={userName} callBack={changeUserName} />
 
             <EditOutlined />
           </div>
-          <div className={s.infoBlock}>
             <div>
-              <b>E-mail:</b>
+              <b>E-mail: </b>
               {email}
             </div>
             <div>
               <b>Card Packs: </b> {publicCardPacksCount}
             </div>
+            <Button onClick={handleLogout}>Logout</Button>
           </div>
-          <SuperButton onClick={handleLogout}>Logout</SuperButton>
+       
         </div>
       </div>
     </div>
