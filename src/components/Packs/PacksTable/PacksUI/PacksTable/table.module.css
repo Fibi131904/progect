@@ -1,20 +1,27 @@
 .tableContainer {
   display: flex;
-  flex-direction: column;
-  overflow: auto;
-  width: 90vh;
+  flex-direction: column; 
+  align-items: center;
 }
+ 
+
 .table {
-  width: 100%;
+  table-layout:fixed; width:950px;
   font-size: 16px;
-   border-collapse: collapse; 
+  border-collapse: collapse;
   text-align: center;
-  border-radius: 20px;
-  margin-bottom: 50px;
+  border-radius: 20px;  
+  margin: 20px;
 }
+table td {
+	overflow:hidden;
+}
+
+
 .tableThead{
-  background: #EFEFEF;
+  background: #c3baba36;
 }
+
 .triangle {
   display: flex;
   flex-direction: column;
@@ -23,7 +30,8 @@
   font-size: 12px;
   cursor: pointer;
 }
+
 .table th, td {
-  padding: 7px 7px;
+   padding: 7px 0px 7px 0px; 
   border: solid 1px#D9D9D9;
 }

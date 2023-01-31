@@ -1,4 +1,3 @@
-import { Button } from 'antd'
 import { EditableSpan } from '../../../common/super-components/EditableSpan'
 import s from '../../../styles/Auth.module.css'
 import myFoto from '../../../assets/images/myFoto.webp'
@@ -10,6 +9,7 @@ import { logoutTC } from '../../Auth/Login/LoginBLL/login-reducer'
 import { PATH } from '../../../app/RoutesPage'
 import { Header } from '../../Header/Header'
 import { useCallback } from 'react'
+import { SuperButton } from '../../../common/super-components/SuperButton/SuperButton'
 
 type ProfileType = {
   title?: string
@@ -31,11 +31,8 @@ export const Profile: React.FC<ProfileType> = () => {
   const dispatch = useAppDispatch()
 
   const changeUserName = useCallback((name: string) => {
-      dispatch(
-      updateProfile(name)     
-      
-    )
-  },[])
+    dispatch(updateProfile(name))
+  }, [])
 
   const handleLogout = () => {
     dispatch(logoutTC())
@@ -67,9 +64,7 @@ export const Profile: React.FC<ProfileType> = () => {
               <b>Card Packs: </b> {publicCardPacksCount}
             </div>
           </div>
-          <Button color={'primary'} onClick={handleLogout} className={s.btn} size='small'>
-            Logout
-          </Button>
+          <SuperButton onClick={handleLogout}>Logout</SuperButton>
         </div>
       </div>
     </div>

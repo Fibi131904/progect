@@ -1,4 +1,3 @@
-import { useFormik } from 'formik'
 import React from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useSelector } from 'react-redux'
@@ -7,6 +6,7 @@ import { PATH } from '../../../../app/RoutesPage'
 import { AppStateType, useAppDispatch } from '../../../../store/store'
 import s from '../../../../styles/Auth.module.css'
 import { loginTC } from '../LoginBLL/login-reducer'
+import { SuperButton } from '../../../../common/super-components/SuperButton/SuperButton';
 
 
 
@@ -71,9 +71,10 @@ export const Login = () => {
       <div>
         <Link  to={PATH.RECOVERY}>Forgot Password</Link>
       </div>
-        <Button type="primary" htmlType="submit"  className={s.btn}>
+        <SuperButton
+               type={'submit'} >
         Login
-        </Button>
+        </SuperButton>
        <div>Don’t have an account?</div> 
                 <Link to={PATH.REGISTRATION}>Sign Up</Link>
       </Form.Item>

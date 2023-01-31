@@ -1,6 +1,8 @@
 .paginator {
     display: flex;
+    justify-content: center;
     margin: 10px;
+    flex-wrap: wrap;
 }
 
 .paginatorNumbers {
@@ -17,27 +19,22 @@
     width: 20px;
     height: 20px;
     text-align: center;
-
 }
 
 .selectedPage {
     font-weight: bold;
     border: 1px solid#1e1c1c;
     border-radius: 5px;
-    background: #0389c9;
+    background: #D9D9D9
 }
 
-.button {
+.buttonPaginator {
     border: none;
     background: none;
     transition: transform .2s;
-    
-
-
-
 }
 
-button:hover {
+.buttonPaginator:hover {
     color: rgb(149, 61, 222);
     transform: scale(1.5);
 }

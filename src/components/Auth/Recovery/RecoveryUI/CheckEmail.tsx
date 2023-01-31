@@ -13,14 +13,13 @@ export const CheckEmail = () => {
         <div className={s.title}>
           <h2>Check Email </h2>
         </div>
-        <img src={Email} alt={'Email img'} className={s.img}/>
+        <img src={Email} alt={'Email img'} className={s.imgChekEmail}/>
 
         <div>
-          {' '}
-          We've sent an Email with instructions to <b>{email}</b>
+                 We've sent an Email with instructions to <b>{email}</b>
         </div>
 
-        <div className={s.login}>
+        <div className={s.loginCheckEmail}>
           <Link to={PATH.LOGIN}>Sign In</Link>
         </div>
       </div>

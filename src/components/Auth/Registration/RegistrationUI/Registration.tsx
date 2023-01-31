@@ -8,6 +8,7 @@ import {Link, Navigate} from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
 import { signUpTC } from '../RegistrationBLL/registration-reducer';
 import { PATH } from '../../../../app/RoutesPage';
+import { SuperButton } from '../../../../common/super-components/SuperButton/SuperButton';
 
 
 const formItemLayout = {
@@ -123,11 +124,11 @@ export const Registration: React.FC = () => {
 
       
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
+        <SuperButton   type='submit'>
           Sign Up
-        </Button>
+        </SuperButton>
         <div>Alredy have an account?</div>
-            <Link to="/login">Sign In</Link>
+            <Link to='/login'>Sign In</Link>
       </Form.Item>
     </Form>
     </div>

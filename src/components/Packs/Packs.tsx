@@ -1,4 +1,3 @@
-import { Header } from '../Header/Header'
 import { PacksTable } from './PacksTable/PacksTable'
 import { Navigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../store/store'
@@ -7,6 +6,7 @@ import { SearchForm } from '../SearchForm/SearchForm'
 import { ChangeEvent, useState } from 'react'
 import { packsActions } from './PacksBLL/packs-reducer'
 import { Button, Radio, Slider } from 'antd'
+import { SuperButton } from '../../common/super-components/SuperButton/SuperButton'
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
@@ -38,40 +38,38 @@ export const Packs = () => {
   const onAfterChangeHandler = (value: [number, number]) => {
     dispatch(packsActions.setMinMaxAC(value))
   }
-const filterOffHandler=()=>{
-  setValue([0, 110]);
-  dispatch(packsActions.setMinMaxAC([0, 110]))
-}
+  const filterOffHandler = () => {
+    setValue([0, 110])
+    dispatch(packsActions.setMinMaxAC([0, 110]))
+  }
 
   if (!isLoggedIn) {
     return <Navigate to={'/login'} />
   }
   return (
     <div className={s.wrapper}>
-      <div className={s.header}>
-        <div className={s.btn}>
-          <button>Add new pack</button>
-        </div>
-
+      <div className={s.container}>
+      <div className={s.titleBlock}>
+        <div>Packs List</div>
+        <SuperButton>Add new pack</SuperButton>
+      </div>
+      <div className={s.settings}>
         <div>
           <div>Search </div>
-          <SearchForm
-            value={searchValue}
-            onChange={onChangeSearchHandler}
-          />{' '}
+          <SearchForm value={searchValue} onChange={onChangeSearchHandler} />
         </div>
         <div>
           <div>Show packs cards- </div>
           <Radio.Group>
             <Radio.Button
-              value={'My'}
               type={isMyPack ? 'primary' : 'default'}
+              value={'My'}
               onClick={myPacksHandler}>
               My
             </Radio.Button>
             <Radio.Button
-              value={'All'}
               type={!isMyPack ? 'primary' : 'default'}
+              value={'All'}
               onClick={allPacksHandler}>
               All
             </Radio.Button>
@@ -88,11 +86,13 @@ const filterOffHandler=()=>{
             range={true}
           />
         </div>
-        <div><Button  onClick={filterOffHandler}>filter reset</Button> </div>
-      </div>
 
-      <div className={s.title}>Packs List</div>
+        <div className={s.btnFilterReset}>
+          <Button onClick={filterOffHandler}>filter reset</Button>{' '}
+        </div>
+      </div>
       <PacksTable />
+    </div>
     </div>
   )
 }

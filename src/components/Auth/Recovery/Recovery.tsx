@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import s from '../../../styles/Auth.module.css'
 import { useAppDispatch } from '../../../store/store'
 import { recoverTC } from './RecoveryBLL/recovery-reducer'
+import { SuperButton } from '../../../common/super-components/SuperButton/SuperButton'
 
 export const Recovery = () => {
   const [email, setEmail] = useState('')
@@ -37,15 +38,14 @@ password recovery link:
             Enteryour email addres and we will send you further instructions
           </div>
 
-          <div className={s.btn}>
-            <Button
-              type={'primary'}
-              htmlType="submit"
-              shape={'default'}
-              onClick={onEmailSendClick}>
+      
+            <SuperButton  
+              type="submit"
+             
+              onClick={onEmailSendClick} className={s.btn}>
               Send Instructions
-            </Button>
-          </div>
+            </SuperButton>
+        
           <div>Did you remember yiur password ?</div>
           <Link to="/login">Try logging in</Link>
         </Space>

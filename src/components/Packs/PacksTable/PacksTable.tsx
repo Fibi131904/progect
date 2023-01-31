@@ -36,7 +36,7 @@ export const PacksTable = () => {
           <tr>
             <th>
               <div>
-                <div>Name</div>
+                <div >Name</div>
                 <div className={s.triangle}>
                   <div>▲</div>
                   <div>▼</div>
@@ -76,10 +76,10 @@ export const PacksTable = () => {
 
         <tbody>
           <PacksList cardPacks={cardPacks} />
-
-          <tr>
-            <td colSpan={5}>
-              <div>
+         
+        </tbody>
+      </table>
+      <div>
                 <Pagination
                   pageCount={pageCount}
                   cardPacksTotalCount={cardPacksTotalCount}
@@ -87,10 +87,6 @@ export const PacksTable = () => {
                   onPageChanged={onPageChanged}
                 />
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import cn from 'classnames'
 import s from './Pagination.module.css'
 
@@ -9,7 +9,7 @@ type PropsType = {
   onPageChanged: (pageNumber: number) => void
 }
 
-export const Pagination: React.FC<PropsType> = (props) => {
+export const Pagination: React.FC<PropsType> = memo((props) => {
   let pagesCount = Math.ceil(props.cardPacksTotalCount / props.pageCount)
 
   let pages: Array<number> = []
@@ -26,7 +26,7 @@ export const Pagination: React.FC<PropsType> = (props) => {
     <div className={s.paginator}>
       {portionNumber > 1 && (
         <button
-          className={s.button}
+          className={s.buttonPaginator}
           onClick={() => {
             setPortionNumber(portionNumber - 1)
           }}>
@@ -59,7 +59,7 @@ export const Pagination: React.FC<PropsType> = (props) => {
       </div>
       {portionCount > portionNumber && (
         <button
-          className={s.button}
+          className={s.buttonPaginator}
           onClick={() => setPortionNumber(portionNumber + 1)}>
           <p>
             <i className={s.arrowRight}></i>
@@ -68,4 +68,4 @@ export const Pagination: React.FC<PropsType> = (props) => {
       )}
     </div>
   )
-}
+})
