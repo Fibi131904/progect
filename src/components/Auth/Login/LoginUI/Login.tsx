@@ -1,5 +1,5 @@
 import React  from 'react';
-import { Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input } from 'antd';
 import { useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import { PATH } from '../../../../app/RoutesPage'
@@ -50,7 +50,12 @@ export const Login = () => {
       <Form.Item
         label="Email"
         name="email"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        rules={[{ required: true,
+           message: 'Please enter your email!',
+        },{type:'email', message:'Please enter a valid email'} ,
+      {whitespace: true}    
+  ]}
+  hasFeedback
       >
         <Input />
       </Form.Item>
@@ -58,12 +63,15 @@ export const Login = () => {
       <Form.Item
         label="Password"
         name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
+        rules={[{ required: true },
+        {min: 6 }]}
+        hasFeedback
       >
         <Input.Password />
       </Form.Item>
 
-      <Form.Item name="rememberMe" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+      <Form.Item name="rememberMe" valuePropName="checked"
+       wrapperCol={{ offset: 8, span: 16 }}>
         <Checkbox>Remember me</Checkbox>
       </Form.Item>
 
@@ -71,10 +79,10 @@ export const Login = () => {
       <div>
         <Link  to={PATH.RECOVERY}>Forgot Password</Link>
       </div>
-        <SuperButton
-               type={'submit'} >
+        <Button block type='primary'
+               htmlType='submit' >
         Login
-        </SuperButton>
+        </Button>
        <div>Don’t have an account?</div> 
                 <Link to={PATH.REGISTRATION}>Sign Up</Link>
       </Form.Item>
