@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
+import React  from 'react';
+import { Checkbox, Form, Input } from 'antd';
 import { useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import { PATH } from '../../../../app/RoutesPage'
@@ -12,18 +12,18 @@ import { SuperButton } from '../../../../common/super-components/SuperButton/Sup
 
 export const Login = () => {
   const isLoggedIn = useSelector<AppStateType, boolean>(
-    (state) => state.login.isLoggedIn
-  )
+    (state) => state.login.isLoggedIn)
+   
   const dispatch = useAppDispatch()
+
   const onFinish = (values: any) => {
     dispatch(loginTC(values))
-
-  };
+  }
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
- 
-  };
+    console.log('Failed:', errorInfo) 
+  }
+
 
   
 

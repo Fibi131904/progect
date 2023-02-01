@@ -5,6 +5,7 @@ import { errorUtils } from "../../../../utils/error-utils"
 import { profileActions } from "../../../Profile/ProfileBLL/profile-reducer"
 import { loginAPI, LoginType } from "../LoginAPI/loginAPI"
 import { AxiosError } from "axios"
+import { packsActions } from "../../../Packs/PacksBLL/packs-reducer"
 
 
 
@@ -55,6 +56,8 @@ export const logoutTC = (): AppThunk => async dispatch => {
   try {
       await loginAPI.logout()
       dispatch(loginActions.setLoginError(''))
+      dispatch(loginActions.setIsLoggedIn(false))
+      dispatch(packsActions.setPacks([]))
    
   } catch (e) {
       if (axios.isAxiosError(e)) {
