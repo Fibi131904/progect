@@ -5,33 +5,42 @@
   align-items: center;
   flex-direction: column;
 }
+
 .form {
-  
   border: 1px solid;
-  border-radius: 10px; 
+  border-radius: 10px;
   background: #ffffff;
   color: #51595e;
   height: 400px;
   width: 400px;
   display: flex;
   flex-direction: column;
-align-items: center;  
-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1), -2px -2px 2px rgba(0, 0, 0, 0.1);
-
+  align-items: center;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1), -2px -2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-  margin:0  auto;
+  margin: 0 auto;
 }
-.imgChekEmail{
+
+.recoveryBlock {
+  margin-top: 40px;
+  height: 270px;
+  width: 270px;
+}
+
+.imgChekEmail {
   height: 96px;
   width: 96px;
   padding-bottom: 30px;
+}
 
+.item {
+  padding: 8px;
 }
 
 
-.imgUser{
+.imgUser {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -40,14 +49,13 @@ box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1), -2px -2px 2px rgba(0, 0, 0, 0.1);
   width: 96px;
   border-radius: 50px;
 }
-.infoBlock{
+
+.infoBlock {
   height: 160px;
   display: flex;
- flex-direction: column;
- justify-content: space-between;  
+  flex-direction: column;
+  justify-content: space-between;
 }
-
-
 
 .formSummaryEerror {
   border: 2px solid red;

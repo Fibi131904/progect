@@ -30,7 +30,7 @@ password recovery link:
         <div className={s.title}>
           <h2>Forgot your password?</h2>
         </div>
-
+        <div className={s. recoveryBlock}>
         <Space direction="vertical" >
           <Input placeholder="Email" value={email} onChange={emailEnter}  autoComplete="on" />
 
@@ -50,6 +50,7 @@ password recovery link:
           <div>Did you remember yiur password ?</div>
           <Link to="/login">Try logging in</Link>
         </Space>
+      </div>
       </div>
     </div>
   )

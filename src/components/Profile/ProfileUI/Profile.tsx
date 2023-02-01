@@ -45,8 +45,7 @@ export const Profile: React.FC<ProfileType> = () => {
 
   return (
     <div className={s.container}>
-      <Header />
-
+    
       <div className={s.form}>
         <h3>Personal Information</h3>
         <div>
