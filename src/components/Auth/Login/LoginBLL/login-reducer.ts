@@ -44,7 +44,8 @@ export const loginTC = (login: LoginType): AppThunk =>async (dispatch) => {
             //@ts-ignore
             dispatch(profileActions.setUserData(res))
         }
-        catch(error: any | AxiosError<{ error: string; }, any>) {
+        catch(error: any | AxiosError<{ error: string }, any>) {
+         
             errorUtils(error, dispatch)
         }
         finally{

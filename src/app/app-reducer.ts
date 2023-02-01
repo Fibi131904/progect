@@ -1,6 +1,6 @@
-import { profileActions } from '../components/Profile/ProfileBLL/profile-reducer';
-import { AppThunk, InferActionTypes } from '../store/store';
-import { loginAPI } from '../components/Auth/Login/LoginAPI/loginAPI';
+
+import {  InferActionTypes } from '../store/store';
+
 
 const appInitialState = {
     status: 'idle' as RequestStatusType,

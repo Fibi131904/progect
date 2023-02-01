@@ -7,7 +7,9 @@ export const errorUtils = (e: Error | AxiosError<{error: string}>, dispatch: Dis
   if (axios.isAxiosError(err)) {
       const error = err.response?.data ? err.response.data.error : err.message
       dispatch(appActions.setAppError(error))
+      console.log(error)
   } else {
       dispatch(appActions.setAppError(`Native error ${err.message}`))
+    
   }
 }
