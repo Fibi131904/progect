@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { CardPacksType } from '../../../PacksAPI/PacksAPI'
+import { CardPacksType } from '../../PacksAPI/PacksAPI'
 import { Pack } from './Pack'
 
 type PackListPropsType = {

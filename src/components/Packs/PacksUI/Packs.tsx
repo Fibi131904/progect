@@ -1,12 +1,12 @@
 import { PacksTable } from './PacksTable/PacksTable'
 import { Navigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../store/store'
+import { useAppDispatch, useAppSelector } from '../../../store/store'
 import s from './Packs.module.css'
-import { SearchForm } from '../SearchForm/SearchForm'
+import { SearchForm } from '../../SearchForm/SearchForm'
 import { ChangeEvent, useState } from 'react'
-import { packsActions } from './PacksBLL/packs-reducer'
+import { packsActions } from '../PacksBLL/packs-reducer'
 import { Button, Radio, Slider } from 'antd'
-import { SuperButton } from '../../common/super-components/SuperButton/SuperButton'
+
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
