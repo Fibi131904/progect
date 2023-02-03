@@ -1,5 +1,4 @@
 import { instance } from "../../../api/instance"
-import { UserDataType } from "../ProfileBLL/profile-reducer";
 import {AxiosResponse} from 'axios'
 
 export const profileAPI = {

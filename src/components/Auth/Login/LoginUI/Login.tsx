@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Checkbox, Form, Input } from 'antd'
+import { Alert, Button, Checkbox, Form, Input } from 'antd'
 import { useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import { PATH } from '../../../../app/RoutesPage'
@@ -8,15 +8,20 @@ import s from '../../../../styles/Auth.module.css'
 import { loginTC } from '../LoginBLL/login-reducer'
 
 
+
 export const Login = () => {
   const isLoggedIn = useSelector<AppStateType, boolean>(
     (state) => state.login.isLoggedIn
+  )
+  const error = useSelector<AppStateType, null|string>(
+    (state) => state.app.error
   )
 
   const dispatch = useAppDispatch()
 
   const onFinish = (values: any) => {
     dispatch(loginTC(values))
+    
   }
 
   const onFinishFailed = (errorInfo: any) => {
@@ -29,7 +34,7 @@ export const Login = () => {
 
   return (
     <div className={s.container}>
-      <div className={s.form}>
+         <div className={s.form}>
         <div className={s.title}>
           <h2>Login</h2>
         </div>
@@ -76,9 +81,13 @@ export const Login = () => {
             </Button>
             <div className={s.item}>Don’t have an account?</div>
             <Link to={PATH.REGISTRATION}> Sign Up</Link>
+            <div  className={s.error} >{error}</div>
           </Form.Item>
+          
         </Form>
+       
       </div>
+    
     </div>
   )
 }

@@ -11,15 +11,16 @@ import { RoutesPage } from './RoutesPage';
 
 export const App=()=> {
   const status = useAppSelector((state) => state.app.status)
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
       dispatch(authMe());
-  }, []);
+  }, [dispatch]);
+ 
 
-
-  return(
-    <div>
+  return (
+    <div>  
     <Header/> 
     {status=== 'loading' && <Preloader/>}
     <RoutesPage/>

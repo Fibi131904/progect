@@ -4,7 +4,7 @@ import {  InferActionTypes } from '../store/store';
 
 const appInitialState = {
     status: 'idle' as RequestStatusType,
-    error: '',
+    error: null as null | string,
     isLoading: false,
     isInitialized: false
 }
@@ -25,7 +25,7 @@ export const appReducer = (state: AppInitialStateType = appInitialState, action:
 
 export const appActions = {
     setAppStatus: (status: RequestStatusType) => ({ type: 'APP/SET_STATUS', payload: { status } } as const),
-    setAppError: (error: string) => ({ type: 'APP/SET_ERROR', payload: { error } } as const),
+    setAppError: (error: null |string) => ({ type: 'APP/SET_ERROR', payload: { error } } as const),
     setAppIsLoading: (isLoading: boolean) => ({ type: 'APP/SET_IS_LOADING', payload: { isLoading } } as const),
     setInitialized: (value: boolean) => ({ type: 'APP/SET_IS_INITIALIZED', payload: { value } } as const),
 }

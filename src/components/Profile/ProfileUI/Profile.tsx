@@ -7,7 +7,6 @@ import { updateProfile } from '../ProfileBLL/profile-reducer'
 import { Navigate } from 'react-router-dom'
 import { logoutTC } from '../../Auth/Login/LoginBLL/login-reducer'
 import { PATH } from '../../../app/RoutesPage'
-import { Header } from '../../Header/Header'
 import { useCallback } from 'react'
 import { Button } from 'antd'
 
