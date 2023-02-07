@@ -1,11 +1,12 @@
 import React from 'react'
 import { Navigate,  Routes, Route } from 'react-router-dom'
-import { AddNewCard } from '../components/AddNewCardList/AddNewCard'
+import { AddNewPack } from '../components/AddNewPackList/AddNewPack'
 import { Login } from "../components/Auth/Login/LoginUI/Login"
 import { NewPassword } from '../components/Auth/NewPassword/NewPasswordUI/NewPassword'
 import { Recovery } from '../components/Auth/Recovery/Recovery'
 import { CheckEmail } from '../components/Auth/Recovery/RecoveryUI/CheckEmail'
 import { Registration } from '../components/Auth/Registration/RegistrationUI/Registration'
+import { Cards } from '../components/Cards/CardsUI/Cards'
 import { Packs } from '../components/Packs/PacksUI/Packs'
 import { Profile } from '../components/Profile/ProfileUI/Profile'
 
@@ -15,7 +16,8 @@ export enum PATH {
   REGISTRATION= '/registration',
   PROFILE='/profile',
   RECOVERY='/recoverPassword',
-  ADDNEWCARD='/addNewCard'
+  ADDNEWPACK='/addNewPack',
+
 }
 
 export const RoutesPage=()=>{
@@ -33,7 +35,8 @@ export const RoutesPage=()=>{
                 <Route path={':token'} element={<NewPassword/>}/>
             </Route>
             <Route path={'/packs'} element={<Packs/>}/>
-            <Route path={PATH.ADDNEWCARD} element={<AddNewCard/>}/>
+            <Route path={PATH.ADDNEWPACK} element={<AddNewPack/>}/>
+            <Route path={'/cards/:packId/:packName'} element={<Cards/>}/>
          
     
     </Routes>

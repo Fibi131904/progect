@@ -1,11 +1,11 @@
 import React from 'react'
-import s from './AddNewCard.module.css'
+import s from './AddNewPack.module.css'
 import { Button } from 'antd'
 import { Navigate } from 'react-router-dom'
 import { useAppSelector } from '../../store/store'
 import { PATH } from '../../app/RoutesPage'
 
-export const AddNewCard = () => {
+export const AddNewPack = () => {
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn)
 
   if (!isLoggedIn) {

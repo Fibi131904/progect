@@ -57,7 +57,7 @@ export const Packs = () => {
         <div>
           Packs List
         </div>
-        <Link to={PATH.ADDNEWCARD} className={s.linkAddCard}>Add new pack</Link>
+        <Link to={PATH.ADDNEWPACK} className={s.linkAddCard}>Add new pack</Link>
          </div>
 
       <div className={s.settings}>
