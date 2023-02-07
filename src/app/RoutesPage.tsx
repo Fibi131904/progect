@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navigate,  Routes, Route } from 'react-router-dom'
+import { AddNewCard } from '../components/AddNewCardList/AddNewCard'
 import { Login } from "../components/Auth/Login/LoginUI/Login"
 import { NewPassword } from '../components/Auth/NewPassword/NewPasswordUI/NewPassword'
 import { Recovery } from '../components/Auth/Recovery/Recovery'
@@ -13,7 +14,8 @@ export enum PATH {
   LOGIN = '/login',
   REGISTRATION= '/registration',
   PROFILE='/profile',
-  RECOVERY='/recoverPassword'
+  RECOVERY='/recoverPassword',
+  ADDNEWCARD='/addNewCard'
 }
 
 export const RoutesPage=()=>{
@@ -31,6 +33,7 @@ export const RoutesPage=()=>{
                 <Route path={':token'} element={<NewPassword/>}/>
             </Route>
             <Route path={'/packs'} element={<Packs/>}/>
+            <Route path={PATH.ADDNEWCARD} element={<AddNewCard/>}/>
          
     
     </Routes>

@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import cn from 'classnames'
 import s from './Pagination.module.css'
+
 
 type PropsType = {
   cardPacksTotalCount: number
   pageCount: number
   page: number
   onPageChanged: (pageNumber: number) => void
-}
+ }
 
 export const Pagination: React.FC<PropsType> = (props) => {
   let pagesCount = Math.ceil(props.cardPacksTotalCount / props.pageCount)
@@ -21,6 +22,8 @@ export const Pagination: React.FC<PropsType> = (props) => {
   let [portionNumber, setPortionNumber] = useState(1)
   let leftPortionPageNumber = (portionNumber - 1) * props.pageCount + 1
   let rightPortionPageNumber = portionNumber * props.pageCount
+
+
 
   return (
     <div className={s.paginator}>
@@ -66,6 +69,7 @@ export const Pagination: React.FC<PropsType> = (props) => {
           </p>
         </button>
       )}
+      
     </div>
   )
 }

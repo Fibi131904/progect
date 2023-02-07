@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  background: rgb(131, 212, 107);
 }
 
 .titleBlock {
@@ -13,8 +12,6 @@
   padding: 10px;
   height: 50px;
   align-items: center;
-  border: 1px solid yellowgreen;
-  background: darkorange ;
 }
 
 .settings {
@@ -22,8 +19,23 @@
   flex-direction: row;
   justify-content: space-around;
   margin: 0px 200px 10px 200px;
-  background: rgb(195, 80, 151) ;
 }
+
+.linkAddCard{
+  font: 12px Arial;
+  text-decoration: none;
+  background-color: #fafafa;
+  color: #333333;
+  padding: 7px 11px 7px 11px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+}
+
+.linkAddCard:hover {
+
+  color:#4096ff;
+}
+
 .btnFilterReset {
 margin-top: 20px;
 }

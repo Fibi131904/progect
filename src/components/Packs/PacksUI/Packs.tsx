@@ -1,11 +1,13 @@
 import { PacksTable } from './PacksTable/PacksTable'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import { PATH } from '../../../app/RoutesPage'
 import { useAppDispatch, useAppSelector } from '../../../store/store'
 import s from './Packs.module.css'
 import { SearchForm } from '../../SearchForm/SearchForm'
 import { ChangeEvent, useState } from 'react'
 import { packsActions } from '../PacksBLL/packs-reducer'
 import { Button, Radio, Slider } from 'antd'
+
 
 
 export const Packs = () => {
@@ -16,6 +18,7 @@ export const Packs = () => {
   const maxCardsCount = useAppSelector((state) => state.packs.maxCardsCount)
   const min = useAppSelector((state) => state.packs.params.min)
   const max = useAppSelector((state) => state.packs.params.max)
+ 
 
   const [searchValue, setSearchValue] = useState('')
   const [value, setValue] = useState<[number, number]>([min, max])
@@ -24,11 +27,11 @@ export const Packs = () => {
     setSearchValue(e.currentTarget.value)
     dispatch(packsActions.setTitleForSearch(e.currentTarget.value))
   }
-  const myPacksHandler = () => {
-    dispatch(packsActions.setMyAllPacksAC(true))
+  const allPacksHandler = () => {  
+      dispatch(packsActions.setMyAllPacksAC(false))
   }
-  const allPacksHandler = () => {
-    dispatch(packsActions.setMyAllPacksAC(false))
+      const myPacksHandler = () => {
+      dispatch(packsActions.setMyAllPacksAC(true))
   }
 
   const handleChange = (newValue: [number, number]) => {
@@ -54,8 +57,8 @@ export const Packs = () => {
         <div>
           Packs List
         </div>
-        <Button>Add new pack</Button>
-      </div>
+        <Link to={PATH.ADDNEWCARD} className={s.linkAddCard}>Add new pack</Link>
+         </div>
 
       <div className={s.settings}>
         <div>
