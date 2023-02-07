@@ -7,7 +7,7 @@ import { cardsAPI, CardType } from "../CardsAPI/CardsAPI";
 
 
 const cardsInitialState = {
-  cardPacks: [] as CardType[],
+  cards: [] as CardType[],
   params: {
     cardAnswer: '',
     cardQuestion: '',

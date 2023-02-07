@@ -25,7 +25,7 @@ const openCard=()=>{
 }
 
   return <tr>
-        <td onClick={openCard}>{pack.name}</td>
+        <td onClick={openCard} style={{cursor: 'pointer'}}>{pack.name}</td>
         <td>{pack.cardsCount}</td>
         <td>{formatDate(pack.updated)}</td>
         <td>{pack.user_name}</td>

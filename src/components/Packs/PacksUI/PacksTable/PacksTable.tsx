@@ -3,8 +3,9 @@ import { useAppDispatch, useAppSelector } from '../../../../store/store'
 import { Pagination } from '../../../Pagination/Pagination'
 import { getPacksTC, packsActions } from '../../PacksBLL/packs-reducer'
 import { PacksList } from '../PackList/PacksList'
-import s from './table.module.css'
 import { TableHeader } from './TableHeader'
+import s from './table.module.css'
+
 
 export const PacksTable = () => {
   const dispatch = useAppDispatch()

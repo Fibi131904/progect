@@ -2,11 +2,12 @@
 import { Link, Navigate } from 'react-router-dom'
 import { PATH } from '../../../app/RoutesPage'
 import { useAppDispatch, useAppSelector } from '../../../store/store'
-
+import s from './Cards.module.css'
 
 import { useParams} from 'react-router-dom';
 
 import { Button } from 'antd'
+import { CardsTable } from './CardsTable';
 
 
 
@@ -29,13 +30,12 @@ export const Cards = () => {
     return <Navigate to={'/login'} />
   }
   return (
-    <div >
-    AddCardForm
+    <div className={s.container}>
+   <Button>AddCardForm</Button> 
     <div>
         <div >
             <div>
-                <Button 
-                             >
+                <Button >
                     ←
                 </Button>
                 <div >{packName}</div>
@@ -58,7 +58,7 @@ export const Cards = () => {
                     }
                 </div>
             </div>
-            <div >CardsTable</div>
+            <div ><CardsTable/></div>
         </div>
     </div>
 </div>
