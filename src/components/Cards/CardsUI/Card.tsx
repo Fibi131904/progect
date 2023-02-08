@@ -21,20 +21,18 @@ export const Card: FC<CardPropsType> = ({ card }) => {
     )
   }
 
-  return (
-    <tr>
+  return  <tr>
       <td>{card.question}</td>
       <td>{card.answer}</td>
       <td>{formatDate(card.updated)}</td>
       <td>{card.grade.toFixed(2)}</td>
-      {userId === packUserId && (
+      {userId === packUserId && 
         <td>
           <div>
             <Button>✎</Button>
             <Button>✘</Button>
           </div>
         </td>
-      )}
+      }
     </tr>
-  )
 }

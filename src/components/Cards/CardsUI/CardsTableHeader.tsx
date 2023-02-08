@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useAppDispatch } from '../../../store/store'
 import { packsActions, SortOrderType } from '../../Packs/PacksBLL/packs-reducer'
 import s from '../../Packs/PacksUI/PacksTable/table.module.css'
+import { cardsActions } from '../CardsBLL/cards-reducer'
 
 type  CardsTableHeaderType={
 param: CardsSortFieldsType
@@ -16,16 +17,14 @@ export const CardsTableHeader = ({text, param}:CardsTableHeaderType) => {
 
   const changeSortField = (fieldToSort: CardsSortFieldsType) => {
     setSortField(fieldToSort)
-   // dispatch(cardsActions.setSortParameters(sortOrder + fieldToSort))
+    dispatch(cardsActions.setSortParameters(sortOrder + fieldToSort))
 }
 
 const changeSortOrder = (order: SortOrderType) => {
     setSortOrder(order)
     dispatch(packsActions.setSortParameters(order + sortField))
 }
-  return (
-   
-                  <th>
+  return  <th>
               <div>
               <div onClick={() => changeSortField(param)}>{text}</div>
                 <div className={s.triangle}>
@@ -34,9 +33,4 @@ const changeSortOrder = (order: SortOrderType) => {
                 </div>
               </div>
             </th>
-        
-            
-             
-   
-  )
-}
+ }

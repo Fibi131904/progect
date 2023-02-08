@@ -1,4 +1,3 @@
-
 import { appActions } from "../../../app/app-reducer"
 import { AppThunk, InferActionTypes } from "../../../store/store"
 import { AxiosError } from 'axios';
@@ -29,7 +28,10 @@ export const cardsReducer = (state: CardsInitialStateType = cardsInitialState, a
     case 'CARDS/SET_CARDS_TOTAL_COUNT':
 
         return {...state, ...action.payload}
-  
+  case 'CARDS/SET_ANSWER_FOR_SEARCH':
+  case 'CARDS/SET_QUESTION_FOR_SEARCH':
+  case 'CARDS/SET_SORT_PARAMETERS':
+  return {...state, params:{...state.params, ...action.payload}}
     default:
         return state
 }
@@ -37,22 +39,22 @@ export const cardsReducer = (state: CardsInitialStateType = cardsInitialState, a
 export const cardsActions = {
   setCards: (cards: CardType[]) => ({type: 'CARDS/SET_CARDS', payload: {cards}} as const),
   setCardsTotalCount:(cardsTotalCount:number)=>({type:'CARDS/SET_CARDS_TOTAL_COUNT', payload: {cardsTotalCount}} as const),
+  setAnswerForSearch:(cardAnswer:string)=>({type:'CARDS/SET_ANSWER_FOR_SEARCH', payload:{cardAnswer}}as const),
+  setQuestionForSearch:(cardQuestion:string)=>({type:'CARDS/SET_QUESTION_FOR_SEARCH', payload:{cardQuestion}}as const),
+  setSortParameters: (sortCards: string) => ({type: 'CARDS/SET_SORT_PARAMETERS', payload: {sortCards}} as const),
 }
 
 
 
 export const getCardsTC = (): AppThunk => async (dispatch, getState) =>
 {
-  const params = getState().packs.params
-
-
+  const params = getState().cards.params
   dispatch(appActions.setAppStatus('loading'))
   try
   {
     const data = await cardsAPI.getCards(params)
     dispatch(cardsActions.setCardsTotalCount(data.cardsTotalCount))
-    dispatch(cardsActions.setCards(data.cards))
-  
+    dispatch(cardsActions.setCards(data.cards))     
   }
 
   catch (error: any | AxiosError<{ error: string; }, any>)

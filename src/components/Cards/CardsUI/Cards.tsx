@@ -1,11 +1,7 @@
-
-import { Link, Navigate } from 'react-router-dom'
-import { PATH } from '../../../app/RoutesPage'
+import { Navigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../store/store'
 import s from './Cards.module.css'
-
 import { useParams} from 'react-router-dom';
-
 import { Button } from 'antd'
 import { CardsTable } from './CardsTable';
 
