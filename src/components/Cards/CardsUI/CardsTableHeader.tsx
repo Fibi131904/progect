@@ -17,7 +17,7 @@ export const CardsTableHeader = ({text, param}:CardsTableHeaderType) => {
 
   const changeSortField = (fieldToSort: CardsSortFieldsType) => {
     setSortField(fieldToSort)
-    dispatch(cardsActions.setSortParameters(sortOrder + fieldToSort))
+    // dispatch(cardsActions.setSortParameters(sortOrder + fieldToSort))
 }
 
 const changeSortOrder = (order: SortOrderType) => {

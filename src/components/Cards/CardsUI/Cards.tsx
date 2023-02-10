@@ -4,13 +4,14 @@ import s from './Cards.module.css'
 import { useParams} from 'react-router-dom';
 import { Button } from 'antd'
 import { CardsTable } from './CardsTable';
+import { addCardTC } from '../CardsBLL/cards-reducer';
 
 
 
 export const Cards = () => {
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn)
-  const packName= useAppSelector((state) => state.cards.packName)
+//   const packName= useAppSelector((state) => state.cards.packName)
   const minCardsCount = useAppSelector((state) => state.packs.minCardsCount)
   const maxCardsCount = useAppSelector((state) => state.packs.maxCardsCount)
   const min = useAppSelector((state) => state.packs.params.min)
@@ -21,20 +22,20 @@ export const Cards = () => {
 
 
 
-
   if (!isLoggedIn) {
     return <Navigate to={'/login'} />
   }
+
   return (
     <div className={s.container}>
-   <Button>AddCardForm</Button> 
+   <Button >AddCardForm</Button> 
     <div>
         <div >
             <div>
                 <Button >
                     ←
                 </Button>
-                <div >{packName}</div>
+                <div >packName</div>
             </div>
             <div >
                 <div >

@@ -9,7 +9,7 @@ type CardPropsType = {
 }
 
 export const Card: FC<CardPropsType> = ({ card }) => {
-  
+  console.log({card})
   const userId = useAppSelector((state) => state.profile.user._id)
   const { packUserId } = useParams<'packUserId'>()
 

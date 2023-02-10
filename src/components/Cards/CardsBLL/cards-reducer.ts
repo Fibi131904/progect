@@ -2,84 +2,100 @@ import { appActions } from "../../../app/app-reducer"
 import { AppThunk, InferActionTypes } from "../../../store/store"
 import { AxiosError } from 'axios';
 import { errorUtils } from "../../../utils/error-utils"
-import { cardsAPI, CardType } from "../CardsAPI/CardsAPI";
+import { cardsAPI, CardType, NewCardType } from "../CardsAPI/CardsAPI";
 
 
 const cardsInitialState = {
   cards: [] as CardType[],
+  card: {} as CardType,
+  packUserId: '',
   params: {
-    cardAnswer: '',
-    cardQuestion: '',
-    cardsPack_id: '',
-    min: 0,
-    max: 5,
-    sortCards: '0grade',
-    page: 1,
-    pageCount: 10,
-} as CardsParamsType,
-cardsTotalCount: 0,
-packName: '',
+      page: 1,
+      pageCount: 10,
+      cardsTotalCount: 0,
+      cardQuestion: '',
+      cardAnswer: '',
+  },
+  minGrade: 0,
+  maxGrade: 6,
 }
 
 export const cardsReducer = (state: CardsInitialStateType = cardsInitialState, action: CardsActionTypes): CardsInitialStateType =>
 {
   switch (action.type) {
-    case 'CARDS/SET_CARDS':
-    case 'CARDS/SET_CARDS_TOTAL_COUNT':
+    case 'CARDS/GET_CARDS':
+      case 'CARDS/SET-PACK-USER-ID':
+      case 'CARDS/SET-PAGE':
+      case 'CARDS/SET-PAGE-COUNT':
+      case 'CARDS/SET-CARDS-TOTAL-COUNT':
 
         return {...state, ...action.payload}
-  case 'CARDS/SET_ANSWER_FOR_SEARCH':
-  case 'CARDS/SET_QUESTION_FOR_SEARCH':
-  case 'CARDS/SET_SORT_PARAMETERS':
-  return {...state, params:{...state.params, ...action.payload}}
+ 
     default:
         return state
 }
 }
 export const cardsActions = {
-  setCards: (cards: CardType[]) => ({type: 'CARDS/SET_CARDS', payload: {cards}} as const),
-  setCardsTotalCount:(cardsTotalCount:number)=>({type:'CARDS/SET_CARDS_TOTAL_COUNT', payload: {cardsTotalCount}} as const),
-  setAnswerForSearch:(cardAnswer:string)=>({type:'CARDS/SET_ANSWER_FOR_SEARCH', payload:{cardAnswer}}as const),
-  setQuestionForSearch:(cardQuestion:string)=>({type:'CARDS/SET_QUESTION_FOR_SEARCH', payload:{cardQuestion}}as const),
-  setSortParameters: (sortCards: string) => ({type: 'CARDS/SET_SORT_PARAMETERS', payload: {sortCards}} as const),
+  getCards: (cards: CardType[]) => ({type: 'CARDS/GET_CARDS', payload: {cards}} as const),
+  setPackUserId: (packUserId: string) => ({type: 'CARDS/SET-PACK-USER-ID',  payload: {packUserId}} as const),
+  setCardsPage: (page: number) => ({type: 'CARDS/SET-PAGE', payload: { page},} as const),
+setCardsPageCount :(pageCount: number) => ({type: 'CARDS/SET-PAGE-COUNT',  payload: {pageCount},} as const),
+setCardsTotalCount :(cardsTotalCount: number) => ({
+    type: 'CARDS/SET-CARDS-TOTAL-COUNT', payload: 
+    {cardsTotalCount},
+} as const)
+  
 }
 
 
 
-export const getCardsTC = (): AppThunk => async (dispatch, getState) =>
-{
-  const params = getState().cards.params
+export const getCardsTC = (cardsPack_id: string): AppThunk => {
+  return (dispatch, getState) =>{
+  const {params} = getState().cards
   dispatch(appActions.setAppStatus('loading'))
-  try
-  {
-    const data = await cardsAPI.getCards(params)
-    dispatch(cardsActions.setCardsTotalCount(data.cardsTotalCount))
-    dispatch(cardsActions.setCards(data.cards))     
-  }
+ cardsAPI.getCards(cardsPack_id, params)
+.then((res)=>{
+   console.log(res.data.cards)
+     dispatch(cardsActions.getCards(res.data.cards))
+     dispatch(cardsActions.setPackUserId(res.data.packUserId))
+     dispatch(cardsActions.setCardsPage(res.data.page))
+     dispatch(cardsActions.setCardsPageCount(res.data.pageCount))
+     dispatch(cardsActions.setCardsTotalCount(res.data.cardsTotalCount))
+       
+  })
 
-  catch (error: any | AxiosError<{ error: string; }, any>)
+  .catch( (error: any | AxiosError<{ error: string; }, any>)=>
   {
     errorUtils(error, dispatch)
-  }
-  finally
+  })
+  .finally(()=>
   {
     dispatch(appActions.setAppStatus('succeeded'))
-  }
+  })
+}}
+
+export const addCardTC = (newCard: NewCardType): AppThunk =>(dispatch) => {
+   dispatch(appActions.setAppStatus('loading'))
+cardsAPI.addCard(newCard)
+.then((res)=>{
+   
+     dispatch(getCardsTC(newCard.cardsPack_id))
+   
+  } )
+  .catch( (error: any | AxiosError<{ error: string; }, any>)=>
+  {
+    errorUtils(error, dispatch)
+  })
+  .finally(()=>
+  {
+    dispatch(appActions.setAppStatus('succeeded'))
+  })
 }
 
 
 export type CardsInitialStateType = typeof cardsInitialState
 export type CardsActionTypes = InferActionTypes<typeof cardsActions>
-export type CardsParamsType = {
-  cardAnswer: string
-  cardQuestion: string
-  cardsPack_id: string
-  min: number,
-  max: number,
-  sortCards: string
-  page: number
-  pageCount: number
-}
+
 
 
 

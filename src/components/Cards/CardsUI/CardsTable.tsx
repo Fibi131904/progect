@@ -3,7 +3,7 @@ import { CardsTableHeader } from "./CardsTableHeader"
 import { useParams} from 'react-router-dom';
 import { CardsList } from "./CardsList";
 import { useEffect } from "react";
-import { cardsActions, getCardsTC } from "../CardsBLL/cards-reducer";
+import {  getCardsTC } from "../CardsBLL/cards-reducer";
 
 export const CardsTable=()=>{
   const dispatch = useAppDispatch()
@@ -14,14 +14,14 @@ export const CardsTable=()=>{
   const cardQuestion = useAppSelector((state) => state.cards.params.cardQuestion)
   const cardAnswer = useAppSelector((state) => state.cards.params.cardAnswer)
   const pageCount = useAppSelector((state) => state.cards.params.pageCount)
-  const sortCards = useAppSelector((state) => state.cards.params.sortCards)
+//   const sortCards = useAppSelector((state) => state.cards.params.sortCards)
+const {packId, packName} = useParams<'packId' | 'packName'>();
 
-  useEffect(() => {
-    dispatch(getCardsTC())
-    return () => {
-        dispatch(cardsActions.setCards([]))
+useEffect(() => {
+    if (packId) {
+        dispatch(getCardsTC(packId))
     }
-}, [dispatch, cardQuestion, cardAnswer, pageCount, sortCards])
+}, [])
 
   return <div>
   <table >
