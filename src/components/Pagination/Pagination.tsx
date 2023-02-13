@@ -4,14 +4,14 @@ import s from './Pagination.module.css'
 
 
 type PropsType = {
-  cardPacksTotalCount: number
+  itemsPacksTotalCount: number
   pageCount: number
   page: number
   onPageChanged: (pageNumber: number) => void
  }
 
 export const Pagination: React.FC<PropsType> = (props) => {
-  let pagesCount = Math.ceil(props.cardPacksTotalCount / props.pageCount)
+  let pagesCount = Math.ceil(props.itemsPacksTotalCount / props.pageCount)
 
   let pages: Array<number> = []
   for (let i = 1; i <= pagesCount; i++) {

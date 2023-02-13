@@ -61,7 +61,7 @@ export const getCardsTC = (cardsPack_id: string): AppThunk => {
   dispatch(appActions.setAppStatus('loading'))
  cardsAPI.getCards(params)
 .then((res)=>{
-   console.log(res.data.cards)
+  
      dispatch(cardsActions.setCards(res.data.cards))
      dispatch(cardsActions.setCardsPageCount(res.data.pageCount))
      dispatch(cardsActions.setCardsTotalCount(res.data.cardsTotalCount))

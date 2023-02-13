@@ -3,44 +3,43 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-   
 }
+
 .tableContainer {
     display: flex;
     flex-direction: column;
-  }
-   
-  
-  .table {
-    table-layout:fixed;
+}
+
+.table {
+    table-layout: fixed;
     margin: auto;
     width: 90%;
     font-size: 16px;
-      border-collapse: collapse;
-      text-align: center;
-      margin-bottom: 20px;
-      background: rgb(232, 238, 238) ;
-    }
-  
-  table td {
-      overflow:hidden;
-  }
-  
-  
-  .tableThead{
+    border-collapse: collapse;
+    text-align: center;
+    margin-bottom: 20px;
+    background: rgb(232, 238, 238);
+}
+
+table td {
+    overflow: hidden;
+}
+
+.tableThead {
     background: #c3baba36;
-  }
-  
-  .triangle {
+}
+
+.triangle {
     display: flex;
     flex-direction: column;
     margin: -10px 5px;
     width: 10px;
     font-size: 12px;
     cursor: pointer;
-  }
-  
-  .table th, td {
-     padding: 7px 0px 7px 0px; 
+}
+
+.table th,
+td {
+    padding: 7px 0px 7px 0px;
     border: solid 1px#D9D9D9;
-  }
+}

@@ -7,7 +7,7 @@ export const cardsAPI = {
 
   getCards(params: CardsParamsType )
   {
-    return instance.get<RequestGetCardsType, AxiosResponse<CardsResponseType>>('cards/card',{params})
+    return instance.get<CardsParamsType, AxiosResponse<CardsResponseType>>('cards/card',{params})
   },
 
   addCard(card: NewCardType)
@@ -30,16 +30,7 @@ export const cardsAPI = {
 };
 
 
-export type RequestGetCardsType = {
-  cardAnswer?: string
-  cardQuestion?: string
-  cardsPack_id: string
-  min?: number
-  max?: number
-  sortCards?: string
-  page?: number
-  pageCount?: number
-}
+
 
 
 type CardsResponseType = {

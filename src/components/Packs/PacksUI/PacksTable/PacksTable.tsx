@@ -52,7 +52,7 @@ export const PacksTable = () => {
 
       <Pagination
         pageCount={pageCount}
-        cardPacksTotalCount={cardPacksTotalCount}
+        itemsPacksTotalCount={cardPacksTotalCount}
         page={page}
         onPageChanged={onPageChanged}
       />
