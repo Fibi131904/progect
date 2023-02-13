@@ -1,12 +1,13 @@
 import { instance } from "../../../api/instance"
 import { AxiosResponse } from 'axios';
+import { CardsParamsType } from "../CardsBLL/cards-reducer";
 
 
 export const cardsAPI = {
 
-  getCards(cardsPack_id: string, params: RequestGetCardsType)
+  getCards(params: CardsParamsType )
   {
-    return instance.get<RequestGetCardsType, AxiosResponse<CardsResponseType>>(`cards/card/?cardsPack_id=${cardsPack_id}`, {params})
+    return instance.get<RequestGetCardsType, AxiosResponse<CardsResponseType>>('cards/card',{params})
   },
 
   addCard(card: NewCardType)
@@ -32,7 +33,7 @@ export const cardsAPI = {
 export type RequestGetCardsType = {
   cardAnswer?: string
   cardQuestion?: string
-  cardsPack_id?: string
+  cardsPack_id: string
   min?: number
   max?: number
   sortCards?: string
