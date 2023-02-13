@@ -29,9 +29,9 @@ export const cardsReducer = (state: CardsInitialStateType = cardsInitialState, a
     case 'CARDS/SET_PACK_NAME':
         return {...state, ...action.payload}
     case 'CARDS/SET_CURRENT_PAGE':
-    case 'CARDS/SET_ANSWER_FOR_SEARCH':
-    case 'CARDS/SET_QUESTION_FOR_SEARCH':
-    case 'CARDS/SET_SORT_PARAMETERS':
+    case 'CARDS/SET_SEARCH_QUESTION':
+    case 'CARDS/SET_SEARCH-ANSWER':
+     case 'CARDS/SET_SORT_PARAMETERS':
     case 'CARDS/SET_PACK_ID':
     case 'CARDS/SET_CARDS_PAGE_COUNT':
         return {...state, params: {...state.params, ...action.payload}}
@@ -45,8 +45,9 @@ export const cardsActions = {
   setCardsTotalCount: (cardsTotalCount: number) =>
       ({type: 'CARDS/SET_CARDS_TOTAL_COUNT', payload: {cardsTotalCount}} as const),
   setCurrentPage: (page: number) => ({type: 'CARDS/SET_CURRENT_PAGE', payload: {page}} as const),
-  setAnswerForSearch: (cardAnswer: string) => ({type: 'CARDS/SET_ANSWER_FOR_SEARCH', payload: {cardAnswer}} as const),
-  setQuestionForSearch: (cardQuestion: string) => ({type: 'CARDS/SET_QUESTION_FOR_SEARCH', payload: {cardQuestion}} as const),
+  searchQuestion: (cardQuestion: string) => ({type: 'CARDS/SET_SEARCH_QUESTION', payload: {cardQuestion}} as const),
+  searchAnswer: (cardAnswer: string) => ({type: 'CARDS/SET_SEARCH-ANSWER', payload: {cardAnswer}} as const),
+
   setSortParameters: (sortCards: string) => ({type: 'CARDS/SET_SORT_PARAMETERS', payload: {sortCards}} as const),
   setPackId: (cardsPack_id: string) => ({type: 'CARDS/SET_PACK_ID', payload: {cardsPack_id}} as const),
   setPackName: (packName: string) => ({type: 'CARDS/SET_PACK_NAME', payload: {packName}} as const),

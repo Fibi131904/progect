@@ -20,8 +20,8 @@ const formatDate=(date: Date | string | number)=>{
   return new Date(date).toLocaleDateString('ru-RU') + ' ' + new Date(date).toLocaleTimeString()
 }
 const openCard=()=>{
-  dispatch(cardsActions.setQuestionForSearch(''))
-  dispatch(cardsActions.setAnswerForSearch(''))
+  dispatch(cardsActions.searchQuestion(''))
+  dispatch(cardsActions.searchAnswer(''))
   dispatch(cardsActions.setPackName(pack.name))
   dispatch(cardsActions. setPackId(pack._id))
   navigate('/cards/:packId/:packName')
