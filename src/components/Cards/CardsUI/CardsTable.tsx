@@ -3,7 +3,9 @@ import { CardsTableHeader } from "./CardsTableHeader"
 import { useParams} from 'react-router-dom';
 import { CardsList } from "./CardsList";
 import { useEffect } from "react";
+import s from './CardsTable.module.css'
 import {  getCardsTC } from "../CardsBLL/cards-reducer";
+
 
 export const CardsTable=()=>{
   const dispatch = useAppDispatch()
@@ -23,8 +25,8 @@ useEffect(() => {
     }
 }, [])
 
-  return <div>
-  <table >
+return <div className={s.tableContainer}>
+  <table  className={s.table}>
       <thead>
       <tr>
           <CardsTableHeader text={'Question'} param={'question'}/>
@@ -41,14 +43,10 @@ useEffect(() => {
       </thead>
       <tbody>
       <CardsList cards={cards}/>
-      <tr>
-          <td colSpan={5} >
-              <div>
-                  Paginator
-              </div>
-          </td>
-      </tr>
-      </tbody>
+    </tbody>
   </table>
+  <div>
+                  Paginator
+ </div>
 </div>
 }

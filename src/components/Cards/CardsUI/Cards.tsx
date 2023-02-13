@@ -1,17 +1,18 @@
-import { Navigate } from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store/store'
 import s from './Cards.module.css'
-import { useParams} from 'react-router-dom';
+
 import { Button } from 'antd'
 import { CardsTable } from './CardsTable';
-import { addCardTC } from '../CardsBLL/cards-reducer';
+
 
 
 
 export const Cards = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn)
-//   const packName= useAppSelector((state) => state.cards.packName)
+  const packName= useAppSelector((state) => state.cards.packName)
   const minCardsCount = useAppSelector((state) => state.packs.minCardsCount)
   const maxCardsCount = useAppSelector((state) => state.packs.maxCardsCount)
   const min = useAppSelector((state) => state.packs.params.min)
@@ -20,25 +21,27 @@ export const Cards = () => {
 
   const {packUserId} = useParams<'packUserId'>()
 
-
-
-  if (!isLoggedIn) {
-    return <Navigate to={'/login'} />
-  }
+const onBackPage=()=>{
+    navigate(-1)
+}
 
   return (
     <div className={s.container}>
-   <Button >AddCardForm</Button> 
-    <div>
-        <div >
-            <div>
-                <Button >
-                    ←
-                </Button>
-                <div >packName</div>
+  
+  
+            <div className={s.btnBlock}>
+                <Button onClick={onBackPage}>
+                    ← Back to Packs List
+                </Button>             
+              
+            </div>
+            <div className={s.backAndTitle}>
+            <div className={s.title}>{packName}</div>
+            <Button >AddCardForm</Button> 
             </div>
             <div >
-                <div >
+               
+            <div className={s.searchFields}>
                     <div>
                         SearchField 
                     </div>
@@ -55,9 +58,8 @@ export const Cards = () => {
                     }
                 </div>
             </div>
-            <div ><CardsTable/></div>
-        </div>
-    </div>
+            <div className={s.table}><CardsTable/></div>
+     
 </div>
    
   )
