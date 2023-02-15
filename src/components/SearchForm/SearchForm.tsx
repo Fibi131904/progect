@@ -7,6 +7,7 @@ type SearchFormType = {
 }
 
 export const SearchForm: React.FC<SearchFormType> = ({ value, onChange }) => {
+
   return (
     <div>
       <Input.Search

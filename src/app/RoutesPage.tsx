@@ -7,6 +7,7 @@ import { Recovery } from '../components/Auth/Recovery/Recovery'
 import { CheckEmail } from '../components/Auth/Recovery/RecoveryUI/CheckEmail'
 import { Registration } from '../components/Auth/Registration/RegistrationUI/Registration'
 import { Cards } from '../components/Cards/CardsUI/Cards'
+import { LearnPage } from '../components/Learn/LearnPage'
 import { Packs } from '../components/Packs/PacksUI/Packs'
 import { Profile } from '../components/Profile/ProfileUI/Profile'
 
@@ -37,6 +38,7 @@ export const RoutesPage=()=>{
             <Route path={'/packs'} element={<Packs/>}/>
             <Route path={PATH.ADDNEWPACK} element={<AddNewPack/>}/>
             <Route path={'/cards/:packId/:packName'} element={<Cards/>}/>
+            <Route path={'/learn/:packId/:packName'} element={<LearnPage/>}/>
          
     
     </Routes>

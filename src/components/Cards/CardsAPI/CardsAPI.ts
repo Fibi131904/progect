@@ -45,20 +45,20 @@ type CardsResponseType = {
   tokenDeathTime: number
 }
 export type CardType = {
-  answer: string
-  cardsPack_id: string
-  comments: string
-  created: Date
-  grade: number
-  more_id: string
-  question: string
-  rating: number
-  shots: number
-  type: string
-  updated: Date
-  user_id: string
-  __v: number
   _id: string
+  cardsPack_id: string
+  user_id?: string
+  answer: string
+  question: string
+  grade: number
+  shots: number
+  comments?: string
+  type: string
+  rating: number
+  more_id: string
+  created: string
+  updated: string
+  __v?: number
 }
 export type NewCardType = {
   cardsPack_id: string
