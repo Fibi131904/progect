@@ -1,4 +1,4 @@
-import { CardPacksType, packsAPI } from './../PacksAPI/PacksAPI';
+import { AddNewCardType, CardPacksType, packsAPI } from './../PacksAPI/PacksAPI';
 import { appActions } from "../../../app/app-reducer"
 import { AppThunk, InferActionTypes } from "../../../store/store"
 import { AxiosError } from 'axios';
@@ -25,46 +25,47 @@ const packsInitialState = {
 
 export const packsReducer = (state: PacksInitialStateType = packsInitialState, action: PacksActionTypes): PacksInitialStateType =>
 {
-  switch (action.type) {
+  switch (action.type)
+  {
     case 'PACKS/SET_PACKS':
     case 'PACKS/SET_CARD_PACKS_TOTAL_COUNT':
     case 'PACKS/SET_PACKS_MIN_CARDS_COUNT':
     case 'PACKS/SET_PACKS_MAX_CARDS_COUNT':
     case 'PACKS/SET-MY-ALL-PACK':
-        return {...state, ...action.payload}
+      return { ...state, ...action.payload }
     case 'PACKS/SET_CURRENT_PAGE':
     case 'PACKS/SET_TITLE_FOR_SEARCH':
     case 'PACKS/SET_PACKS_FOR_USER':
-    case 'PACKS/SET_SORT_PARAMETERS': 
+    case 'PACKS/SET_SORT_PARAMETERS':
     case 'PACKS/SET_PACKS_PAGE_COUNT':
-        return {...state, params: {...state.params, ...action.payload}}
-        case 'PACKS/SET-MIN-MAX':
-          return {...state, params:{...state.params,min: action.payload.value[0], max: action.payload.value[1]}}
+      return { ...state, params: { ...state.params, ...action.payload } }
+    case 'PACKS/SET-MIN-MAX':
+      return { ...state, params: { ...state.params, min: action.payload.value[ 0 ], max: action.payload.value[ 1 ] } }
     default:
-        return state
-}
+      return state
+  }
 }
 export const packsActions = {
-  setPacks: ( cardPacks: CardPacksType[]) =>
-      ({type: 'PACKS/SET_PACKS', payload: { cardPacks}} as const),
+  setPacks: (cardPacks: CardPacksType[]) =>
+    ({ type: 'PACKS/SET_PACKS', payload: { cardPacks } } as const),
   setPacksForUser: (user_id: string) =>
-      ({type: 'PACKS/SET_PACKS_FOR_USER', payload: {user_id}} as const),
-  setMinMaxAC : (value: Array<number>) => ({type: 'PACKS/SET-MIN-MAX',payload:{ value}} as const),
+    ({ type: 'PACKS/SET_PACKS_FOR_USER', payload: { user_id } } as const),
+  setMinMaxAC: (value: Array<number>) => ({ type: 'PACKS/SET-MIN-MAX', payload: { value } } as const),
   setCardPacksTotalCount: (cardPacksTotalCount: number) =>
-      ({type: 'PACKS/SET_CARD_PACKS_TOTAL_COUNT', payload: {cardPacksTotalCount}} as const),
+    ({ type: 'PACKS/SET_CARD_PACKS_TOTAL_COUNT', payload: { cardPacksTotalCount } } as const),
   setCurrentPage: (page: number) =>
-      ({type: 'PACKS/SET_CURRENT_PAGE', payload: {page}} as const),
+    ({ type: 'PACKS/SET_CURRENT_PAGE', payload: { page } } as const),
   setTitleForSearch: (packName: string) =>
-      ({type: 'PACKS/SET_TITLE_FOR_SEARCH', payload: {packName}} as const),
+    ({ type: 'PACKS/SET_TITLE_FOR_SEARCH', payload: { packName } } as const),
   setSortParameters: (sortPacks: string) =>
-      ({type: 'PACKS/SET_SORT_PARAMETERS', payload: {sortPacks}} as const),
+    ({ type: 'PACKS/SET_SORT_PARAMETERS', payload: { sortPacks } } as const),
   setMinCardsCount: (minCardsCount: number) =>
-      ({type: 'PACKS/SET_PACKS_MIN_CARDS_COUNT', payload: {minCardsCount}} as const),
+    ({ type: 'PACKS/SET_PACKS_MIN_CARDS_COUNT', payload: { minCardsCount } } as const),
   setMaxCardsCount: (maxCardsCount: number) =>
-      ({type: 'PACKS/SET_PACKS_MAX_CARDS_COUNT', payload: {maxCardsCount}} as const),
+    ({ type: 'PACKS/SET_PACKS_MAX_CARDS_COUNT', payload: { maxCardsCount } } as const),
   setPacksPageCount: (pageCount: number) =>
-      ({type: 'PACKS/SET_PACKS_PAGE_COUNT', payload: {pageCount}} as const),
-  setMyAllPacksAC: (isMyPack: boolean) => ({type: 'PACKS/SET-MY-ALL-PACK',payload:{isMyPack}} as const)
+    ({ type: 'PACKS/SET_PACKS_PAGE_COUNT', payload: { pageCount } } as const),
+  setMyAllPacksAC: (isMyPack: boolean) => ({ type: 'PACKS/SET-MY-ALL-PACK', payload: { isMyPack } } as const)
 }
 
 
@@ -93,6 +94,30 @@ export const getPacksTC = (): AppThunk => async (dispatch, getState) =>
   }
 }
 
+
+
+export const addPackTC = (name: string, deckCover: string, isPrivate: boolean): AppThunk => async (dispatch) =>
+{
+  const cardsPack: AddNewCardType = { cardsPack: { name, deckCover, private: isPrivate } }
+  dispatch(appActions.setAppStatus('loading'))
+  try
+  {
+    await packsAPI.addPack(cardsPack)
+    await dispatch(getPacksTC())
+    dispatch(packsActions.setCurrentPage(1))
+  }
+
+  catch (error: any | AxiosError<{ error: string; }, any>)
+  {
+
+    errorUtils(error, dispatch)
+  }
+
+  finally
+  {
+    dispatch(appActions.setAppStatus('succeeded'))
+  }
+}
 
 export type PacksInitialStateType = typeof packsInitialState
 export type PacksActionTypes = InferActionTypes<typeof packsActions>

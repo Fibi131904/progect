@@ -19,6 +19,7 @@ const cardsInitialState = {
     } as CardsParamsType,
     cardsTotalCount: 0,
     packName: '',
+  
 }
 
 export const cardsReducer = (state: CardsInitialStateType = cardsInitialState, action: CardsActionTypes): CardsInitialStateType =>
@@ -79,22 +80,21 @@ export const getCardsTC = (cardsPack_id: string): AppThunk => {
   })
 }}
 
-export const addCardTC = (newCard: NewCardType): AppThunk =>(dispatch) => {
+export const addCardTC = (newCard: NewCardType): AppThunk => async (dispatch) => {
    dispatch(appActions.setAppStatus('loading'))
-cardsAPI.addCard(newCard)
-.then((res)=>{
+   try {
+await cardsAPI.addCard(newCard)
+await dispatch(getCardsTC(newCard.cardsPack_id))
    
-     dispatch(getCardsTC(newCard.cardsPack_id))
-   
-  } )
-  .catch( (error: any | AxiosError<{ error: string; }, any>)=>
+  } 
+  catch (error: any | AxiosError<{ error: string; }, any>)
   {
     errorUtils(error, dispatch)
-  })
-  .finally(()=>
+  }
+  finally
   {
     dispatch(appActions.setAppStatus('succeeded'))
-  })
+  }
 }
 
 

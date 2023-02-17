@@ -2,13 +2,11 @@ import { instance } from "../../../api/instance"
 import {AxiosResponse} from 'axios';
 
 export const packsAPI = {
-
   getPacks(params: RequestGetPacksType) {
-    return instance.get<RequestGetPacksType, AxiosResponse<ResponseCardPacksType>>('/cards/pack', {params}).then(res=>res.data);
+    return instance.get<RequestGetPacksType, AxiosResponse<ResponseCardPacksType>>('/cards/pack', {params}).then(res=> res.data);
 },
-
-addPacks() {
-  return instance.post('cards/pack', {})
+addPack(cardsPack:AddNewCardType) {
+  return instance.post('/cards/pack', cardsPack)
 },
 deletePacks() {
   return instance.delete('cards/pack', {})
@@ -59,4 +57,10 @@ export type CardPacksType = {
   more_id: string
   __v: number
 }
-
+export type AddNewCardType = {
+  cardsPack: {
+      name: string,
+      deckCover?: string,
+      private: boolean
+  }
+}

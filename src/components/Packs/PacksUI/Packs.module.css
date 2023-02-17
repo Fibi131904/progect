@@ -21,7 +21,7 @@
   margin: 0px 200px 10px 200px;
 }
 
-.linkAddCard{
+.linkAddPack{
   font: 12px Arial;
   text-decoration: none;
   background-color: #fafafa;
@@ -31,8 +31,7 @@
   border-radius: 5px;
 }
 
-.linkAddCard:hover {
-
+.linkAddPack:hover {
   color:#4096ff;
 }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navigate,  Routes, Route } from 'react-router-dom'
+import { AddNewCard } from '../components/AddNewCard/AddNewCard'
 import { AddNewPack } from '../components/AddNewPackList/AddNewPack'
 import { Login } from "../components/Auth/Login/LoginUI/Login"
 import { NewPassword } from '../components/Auth/NewPassword/NewPasswordUI/NewPassword'
@@ -18,6 +19,8 @@ export enum PATH {
   PROFILE='/profile',
   RECOVERY='/recoverPassword',
   ADDNEWPACK='/addNewPack',
+  ADDNEWCARD='/addNewCard',
+  PACK='/packs',
 
 }
 
@@ -35,8 +38,9 @@ export const RoutesPage=()=>{
                 <Route index element={<NewPassword/>}/>
                 <Route path={':token'} element={<NewPassword/>}/>
             </Route>
-            <Route path={'/packs'} element={<Packs/>}/>
+            <Route path={PATH.PACK} element={<Packs/>}/>
             <Route path={PATH.ADDNEWPACK} element={<AddNewPack/>}/>
+            <Route path={PATH.ADDNEWCARD} element={<AddNewCard />}/>
             <Route path={'/cards/:packId/:packName'} element={<Cards/>}/>
             <Route path={'/learn/:packId/:packName'} element={<LearnPage/>}/>
          
