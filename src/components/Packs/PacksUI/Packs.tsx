@@ -6,34 +6,40 @@ import s from './Packs.module.css'
 import { SearchForm } from '../../SearchForm/SearchForm'
 import { ChangeEvent, useState } from 'react'
 import { packsActions } from '../PacksBLL/packs-reducer'
-import { Button, Radio, Slider } from 'antd'
+import { Button, Radio, RadioChangeEvent, Slider } from 'antd'
 
 
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn)
-  const isMyPack = useAppSelector((state) => state.packs.isMyPack)
+  const user_id = useAppSelector((state) => state.packs.params.user_id)
   const minCardsCount = useAppSelector((state) => state.packs.minCardsCount)
   const maxCardsCount = useAppSelector((state) => state.packs.maxCardsCount)
   const min = useAppSelector((state) => state.packs.params.min)
   const max = useAppSelector((state) => state.packs.params.max)
  
-
+ 
   const [searchValue, setSearchValue] = useState('')
   const [value, setValue] = useState<[number, number]>([min, max])
-
+  const [value1, setValue1] = useState('All')
   const onChangeSearchHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value)
     dispatch(packsActions.setTitleForSearch(e.currentTarget.value))
   }
-  const allPacksHandler = () => {  
-      dispatch(packsActions.setMyAllPacksAC(false))
+  const onChange = (e: RadioChangeEvent) => {
+    console.log( e.target.value);
+   
+    if ( e.target.value === 'My') {
+      setValue1(e.target.value);
+      dispatch(packsActions.setPacksForUser(user_id))
+     
+  } else {
+    dispatch(packsActions.setPacksForUser(''))   
   }
-      const myPacksHandler = () => {
-      dispatch(packsActions.setMyAllPacksAC(true))
   }
 
+  
   const handleChange = (newValue: [number, number]) => {
     setValue(newValue)
   }
@@ -67,20 +73,14 @@ export const Packs = () => {
         </div>
         <div>
           <div>Show packs cards- </div>
-          <Radio.Group>
-            <Radio.Button
-              type={isMyPack ? 'primary' : 'default'}
-              value={'My'}
-              onClick={myPacksHandler}>
+          <Radio.Group onChange={onChange}>
+            <Radio.Button value={'My'} >
               My
             </Radio.Button>
-            <Radio.Button
-              type={!isMyPack ? 'primary' : 'default'}
-              value={'All'}
-              onClick={allPacksHandler}>
+            <Radio.Button value={'All'}>
               All
             </Radio.Button>
-          </Radio.Group>
+            </Radio.Group>
         </div>
         <div>
           <div>Number of cards </div>
