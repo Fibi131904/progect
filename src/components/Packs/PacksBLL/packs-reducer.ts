@@ -10,6 +10,7 @@ const packsInitialState = {
   minCardsCount: 0,
   maxCardsCount: 103,
   isMyPack: false,
+  packsType: 'All' as PacksType,
   params: {
     packName: '',
     min: 0,
@@ -31,7 +32,7 @@ export const packsReducer = (state: PacksInitialStateType = packsInitialState, a
     case 'PACKS/SET_CARD_PACKS_TOTAL_COUNT':
     case 'PACKS/SET_PACKS_MIN_CARDS_COUNT':
     case 'PACKS/SET_PACKS_MAX_CARDS_COUNT':
-    case 'PACKS/SET-MY-ALL-PACK':
+      case 'PACKS/SET_PACKS_TYPE':
       return { ...state, ...action.payload }
     case 'PACKS/SET_CURRENT_PAGE':
     case 'PACKS/SET_TITLE_FOR_SEARCH':
@@ -65,10 +66,10 @@ export const packsActions = {
     ({ type: 'PACKS/SET_PACKS_MAX_CARDS_COUNT', payload: { maxCardsCount } } as const),
   setPacksPageCount: (pageCount: number) =>
     ({ type: 'PACKS/SET_PACKS_PAGE_COUNT', payload: { pageCount } } as const),
-  setMyAllPacksAC: (isMyPack: boolean) => ({ type: 'PACKS/SET-MY-ALL-PACK', payload: { isMyPack } } as const)
+    setPacksType: (packsType: PacksType)=>
+    ({type: 'PACKS/SET_PACKS_TYPE', payload: {packsType}} as const),
+
 }
-
-
 
 export const getPacksTC = (): AppThunk => async (dispatch, getState) =>
 {
@@ -132,5 +133,6 @@ export type PacksParamsType = {
 }
 export type PacksSortFieldsType = 'name' | 'cardsCount' | 'updated' | 'user_name'
 export type SortOrderType = '0' | '1'
+export type PacksType = 'All' | 'My'
 
 

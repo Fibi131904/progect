@@ -4,39 +4,31 @@ import { PATH } from '../../../app/RoutesPage'
 import { useAppDispatch, useAppSelector } from '../../../store/store'
 import s from './Packs.module.css'
 import { SearchForm } from '../../SearchForm/SearchForm'
-import { ChangeEvent, useState } from 'react'
-import { packsActions } from '../PacksBLL/packs-reducer'
+import { ChangeEvent, useCallback, useState } from 'react'
+import { packsActions, PacksType } from '../PacksBLL/packs-reducer'
 import { Button, Radio, RadioChangeEvent, Slider } from 'antd'
+import { ChooseMyOrAll } from './ChooseMyorAll'
 
 
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn)
-  const user_id = useAppSelector((state) => state.packs.params.user_id)
+  const type = useAppSelector((state) => state.packs.packsType)
+
   const minCardsCount = useAppSelector((state) => state.packs.minCardsCount)
   const maxCardsCount = useAppSelector((state) => state.packs.maxCardsCount)
   const min = useAppSelector((state) => state.packs.params.min)
   const max = useAppSelector((state) => state.packs.params.max)
- 
+
  
   const [searchValue, setSearchValue] = useState('')
   const [value, setValue] = useState<[number, number]>([min, max])
-  const [value1, setValue1] = useState('All')
+
+
   const onChangeSearchHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value)
     dispatch(packsActions.setTitleForSearch(e.currentTarget.value))
-  }
-  const onChange = (e: RadioChangeEvent) => {
-    console.log( e.target.value);
-   
-    if ( e.target.value === 'My') {
-      setValue1(e.target.value);
-      dispatch(packsActions.setPacksForUser(user_id))
-     
-  } else {
-    dispatch(packsActions.setPacksForUser(''))   
-  }
   }
 
   
@@ -72,15 +64,8 @@ export const Packs = () => {
           <SearchForm value={searchValue} onChange={onChangeSearchHandler} />
         </div>
         <div>
-          <div>Show packs cards- </div>
-          <Radio.Group onChange={onChange}>
-            <Radio.Button value={'My'} >
-              My
-            </Radio.Button>
-            <Radio.Button value={'All'}>
-              All
-            </Radio.Button>
-            </Radio.Group>
+          <div>Show packs cards </div>
+          <ChooseMyOrAll/>
         </div>
         <div>
           <div>Number of cards </div>
