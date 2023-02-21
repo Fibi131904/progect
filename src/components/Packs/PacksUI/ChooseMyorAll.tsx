@@ -2,7 +2,6 @@ import { memo, useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector} from "../../../store/store";
 import { ReactElement } from 'react';
 import { packsActions, PacksType } from "../PacksBLL/packs-reducer";
-
 import { SuperRadio } from "../../../common/super-components/SuperRadio/SuperRadio";
 
 export type Nullable<T> = T | null;
