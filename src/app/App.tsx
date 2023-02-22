@@ -24,8 +24,7 @@ export const App=()=> {
     <Header/> 
     {status=== 'loading' && <Preloader/>}
     <RoutesPage/>
-   
-    </div>
+      </div>
   );
 }
 
