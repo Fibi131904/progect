@@ -34,4 +34,4 @@ export const appActions = {
 //types
 export type AppInitialStateType = typeof appInitialState
 export type AppActionTypes = InferActionTypes<typeof appActions>
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed' 

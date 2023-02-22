@@ -1,19 +1,26 @@
 import { Button, Checkbox, Input } from "antd"
-import { useState } from "react"
+import { FC, useState } from "react"
 import { useAppDispatch } from "../../store/store"
 import { addPackTC } from "../Packs/PacksBLL/packs-reducer"
 import { BasicModal } from "./Modal/BasicModal"
+import {useNavigate} from 'react-router-dom';
 
-export const AddPackModal=()=>{
+type AddNewPackType = {
+  isOpenModal: boolean
+  setIsOpenModal: (value: boolean) => void
+}
+export const AddPackModal:FC<AddNewPackType>=({isOpenModal, setIsOpenModal})=>{
 
   const [newPackName, setNewPackName] = useState<string>('')
   const [isPrivate, setPrivate] = useState(false)
   const [newDeckCover, setNewDeckCover] = useState('')
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const onClickAddPack = () => {
     dispatch(addPackTC(newPackName, newDeckCover, isPrivate))
     onClickCleanUpStates()
+    navigate('/packs')
    }
 
   const onClickCleanUpStates = () => {
@@ -22,7 +29,8 @@ export const AddPackModal=()=>{
   }
 
   return (
-    <BasicModal  operetionTitle={'Add new Pack'} >
+    <BasicModal  operetionTitle={'Add new Pack'}   handleOperation={onClickAddPack} isOpenModal={isOpenModal}
+    setIsOpenModal={setIsOpenModal}>
 
 <div>Add new pack</div>
 <Input
@@ -36,10 +44,6 @@ export const AddPackModal=()=>{
         value={ 'Private pack'}
       />
      
-   
-        <Button onClick={onClickAddPack}>Save </Button>
-    
-
     </BasicModal>
   )
 }

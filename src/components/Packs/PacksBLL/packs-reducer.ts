@@ -1,5 +1,5 @@
+import { appActions } from './../../../app/app-reducer';
 import { AddNewCardType, CardPacksType, packsAPI } from './../PacksAPI/PacksAPI';
-import { appActions } from "../../../app/app-reducer"
 import { AppThunk, InferActionTypes } from "../../../store/store"
 import { AxiosError } from 'axios';
 import { errorUtils } from "../../../utils/error-utils"
@@ -119,6 +119,27 @@ export const addPackTC = (name: string, deckCover: string, isPrivate: boolean): 
     dispatch(appActions.setAppStatus('succeeded'))
   }
 }
+
+export const deletePackTC = (packId: string): AppThunk => async (dispatch) =>
+{
+  dispatch(appActions.setAppStatus('loading'))
+  try
+  {
+    await packsAPI.deletePack(packId)
+    await dispatch(getPacksTC())
+
+  } catch (error: any | AxiosError<{ error: string; }, any>)
+  {
+
+    errorUtils(error, dispatch)
+  }
+
+  finally
+  {
+    dispatch(appActions.setAppStatus('succeeded'))
+  }
+}
+
 
 export type PacksInitialStateType = typeof packsInitialState
 export type PacksActionTypes = InferActionTypes<typeof packsActions>

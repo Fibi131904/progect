@@ -20,6 +20,7 @@ export const Packs = () => {
 
   const [searchValue, setSearchValue] = useState('')
   const [value, setValue] = useState<[number, number]>([min, max])
+  const [isOpenModalAddNewPack, setIsOpenModalAddNewPack] = useState(false)
 
   const onChangeSearchHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value)
@@ -45,7 +46,8 @@ export const Packs = () => {
     <div className={s.wrapper}>
       <div className={s.titleBlock}>
         <div>Packs List</div>
-        <AddPackModal />
+        <AddPackModal isOpenModal={isOpenModalAddNewPack}
+                    setIsOpenModal={setIsOpenModalAddNewPack} />
       </div>
 
       <div className={s.settings}>

@@ -1,9 +1,11 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../../store/store"
 import { CardPacksType } from "../../PacksAPI/PacksAPI"
 import {useNavigate} from 'react-router-dom';
 import { cardsActions } from "../../../Cards/CardsBLL/cards-reducer";
-import {  Radio } from "antd";
+import {  Button, Radio } from "antd";
+import { DeletePackModal } from "../../../Modals/DeletePackModal";
+
 
 
 type PackPropsType={
@@ -13,7 +15,8 @@ type PackPropsType={
 export const Pack:FC<PackPropsType>=({pack})=>{
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-
+  const [isDeletingOpen, setIsDeletingOpen] = useState<boolean>(false)
+  const [isOpenModalDelete, setIsOpenModalDelete] = useState(false)
    const userId = useAppSelector((state) => state.profile.user._id)
   
 const formatDate=(date: Date | string | number)=>{
@@ -27,22 +30,32 @@ const openCard=()=>{
   navigate('/cards/:packId/:packName')
 
 }
+const deletePackOn = () => {
+  setIsDeletingOpen(true)
 
-  return <tr>
+}
+
+  return (<>
+  <tr>
         <td onClick={openCard} style={{cursor: 'pointer'}}>{pack.name}</td>
         <td>{pack.cardsCount}</td>
         <td>{formatDate(pack.updated)}</td>
         <td>{pack.user_name}</td>
         <td>
-        <Radio.Group size="small">
-        <Radio.Button  disabled={pack.cardsCount === 0}  onClick={() => {
+       
+        <Button  size="small" disabled={pack.cardsCount === 0}  onClick={() => {
                                             navigate(`/learn/${pack._id}/${pack.name}`)}}>
                                              Learn 
-                                             </Radio.Button>
-        <Radio.Button disabled={userId !== pack.user_id}> Edit</Radio.Button>
-        <Radio.Button  disabled={userId !== pack.user_id}> Delete</Radio.Button>
-        </Radio.Group>
+                                             </Button>
+        <Button  size="small" disabled={userId !== pack.user_id}> Edit</Button>
+        <Button  size="small"  disabled={userId !== pack.user_id} onClick={deletePackOn}> Delete</Button>
+        <DeletePackModal setIsOpenModal={setIsOpenModalDelete} isOpenModal={isDeletingOpen}   cardPackId={pack._id} />
+         
        
         </td>
     </tr>
+
+
+</>
+  )
 }
