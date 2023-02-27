@@ -15,8 +15,8 @@ type PackPropsType={
 export const Pack:FC<PackPropsType>=({pack})=>{
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [deletePackData, setDeletePackData] = useState<CardPacksType| null>(null);
   const [isOpenModalDelete, setIsOpenModalDelete] = useState(false)
+
    const userId = useAppSelector((state) => state.profile.user._id)
   
 const formatDate=(date: Date | string | number)=>{
@@ -29,10 +29,6 @@ const openCard=()=>{
   dispatch(cardsActions. setPackId(pack._id))
   navigate('/cards/:packId/:packName')
 
-}
-const openModalDeletePack = (pack: CardPacksType) => {
-  setIsOpenModalDelete(true)
-  setDeletePackData(pack)
 }
 
   return (<>
@@ -48,19 +44,16 @@ const openModalDeletePack = (pack: CardPacksType) => {
                                              Learn 
                                              </Button>
         <Button  size="small" disabled={userId !== pack.user_id}> Edit</Button>
-        <Button  size="small"  disabled={userId !== pack.user_id}  onClick={() => openModalDeletePack(pack)}> Delete</Button>
+       
+        <DeletePackModal isOpenModal={isOpenModalDelete} setIsOpenModal={setIsOpenModalDelete}
+        cardPackId={pack._id} packName={pack.name}        />
      
          
        
         </td>
     </tr>
 
-    {deletePackData && <DeletePackModal
-                isOpenModal={isOpenModalDelete}
-                setIsOpenModal={setIsOpenModalDelete}
-                packName={deletePackData && deletePackData.name}
-                cardPackId={deletePackData && deletePackData._id}
-            />}
+
 </>
   )
 }

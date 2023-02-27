@@ -26,12 +26,12 @@ export const DeletePackModal: FC<DeletePackModalType> = ({
 
   return (
     <BasicModal
-      operetionTitle={'Delete Pack'}
+      operetionTitle={'Delete'}
       handleOperation={deleteCardPack}
       isOpenModal={isOpenModal}
       setIsOpenModal={setIsOpenModal}>
         
-      <div>Delete Packk</div>
+      <div>Delete Pack</div>
       <div>
         Do you really want to remove <b>{packName}</b>?
       </div>

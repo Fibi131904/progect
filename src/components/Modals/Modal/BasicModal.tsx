@@ -31,7 +31,7 @@ export const BasicModal: React.FC<PropsType> = ({children, operetionTitle,  hand
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" onClick={showModal} size={'small'}>
       {operetionTitle}
       </Button>
       <Modal  open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
