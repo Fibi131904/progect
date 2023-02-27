@@ -1,5 +1,5 @@
 import { appActions } from './../../../app/app-reducer';
-import { AddNewCardType, CardPacksType, packsAPI } from './../PacksAPI/PacksAPI';
+import { AddNewCardType, CardPacksType, packsAPI, UpdatePackType } from './../PacksAPI/PacksAPI';
 import { AppThunk, InferActionTypes } from "../../../store/store"
 import { AxiosError } from 'axios';
 import { errorUtils } from "../../../utils/error-utils"
@@ -131,6 +131,25 @@ export const deletePackTC = (packId: string): AppThunk => async (dispatch) =>
   } catch (error: any | AxiosError<{ error: string; }, any>)
   {
 
+    errorUtils(error, dispatch)
+  }
+
+  finally
+  {
+    dispatch(appActions.setAppStatus('succeeded'))
+  }
+}
+export const updatePackTC = (_id: string, name: string): AppThunk => async (dispatch) =>
+{
+  const cardsPack: UpdatePackType = {cardsPack: {_id, name}}
+  dispatch(appActions.setAppStatus('loading'))
+  try
+  {
+    await packsAPI.updatePack(cardsPack)
+    await dispatch(getPacksTC())
+  
+  } catch (error: any | AxiosError<{ error: string; }, any>)
+  {
     errorUtils(error, dispatch)
   }
 

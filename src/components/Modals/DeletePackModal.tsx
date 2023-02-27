@@ -31,6 +31,7 @@ export const DeletePackModal: FC<DeletePackModalType> = ({
       isOpenModal={isOpenModal}
       setIsOpenModal={setIsOpenModal}>
         
+        
       <div>Delete Pack</div>
       <div>
         Do you really want to remove <b>{packName}</b>?

@@ -9,6 +9,7 @@ type PropsType={
   handleCloseOperation?: () => void
   setIsOpenModal: (value: boolean) => void
   isOpenModal: boolean
+
 }
 
 export const BasicModal: React.FC<PropsType> = ({children, operetionTitle,  handleOperation,isOpenModal,setIsOpenModal, handleCloseOperation}) => {
@@ -31,8 +32,8 @@ export const BasicModal: React.FC<PropsType> = ({children, operetionTitle,  hand
 
   return (
     <>
-      <Button type="primary" onClick={showModal} size={'small'}>
-      {operetionTitle}
+      <Button type='default' onClick={showModal} size={'small'}>
+      {operetionTitle} 
       </Button>
       <Modal  open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
        {children}      

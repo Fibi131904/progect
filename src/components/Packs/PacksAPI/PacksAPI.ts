@@ -11,8 +11,8 @@ addPack(cardsPack:AddNewCardType) {
 deletePack( id: string) {
   return instance.delete(`cards/pack?id=${id}`)
 },
-updatePack() {
-  return instance.put('cards/pack', {})
+updatePack(cardsPack: UpdatePackType) {
+  return instance.put('cards/pack', cardsPack)
 },
 
 };
@@ -62,5 +62,25 @@ export type AddNewCardType = {
       name: string,
       deckCover?: string,
       private: boolean
+  }
+}
+export type UpdatePackType = {
+  cardsPack: {
+      _id: string
+      user_id?: string
+      user_name?: string
+      private?: boolean
+      name?: string
+      path?: string
+      grade?: number
+      shots?: number
+      cardsCount?: number
+      type?: string
+      rating?: number
+      created?: Date
+      updated?: Date
+      more_id?: string
+      __v?: number
+      deckCover?: null | string
   }
 }
