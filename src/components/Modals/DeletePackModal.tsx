@@ -1,6 +1,7 @@
 
 import { FC } from 'react'
-import { useAppDispatch } from '../../store/store'
+import { useAppDispatch, useAppSelector } from '../../store/store'
+import { CardPacksType } from '../Packs/PacksAPI/PacksAPI'
 import { deletePackTC } from '../Packs/PacksBLL/packs-reducer'
 import { BasicModal } from './Modal/BasicModal'
 
@@ -9,6 +10,8 @@ type DeletePackModalType = {
   cardPackId?: string
   setIsOpenModal: (value: boolean) => void
   isOpenModal: boolean,
+
+
 }
 
 export const DeletePackModal: FC<DeletePackModalType> = ({
@@ -16,6 +19,8 @@ export const DeletePackModal: FC<DeletePackModalType> = ({
   packName,
   cardPackId,
   setIsOpenModal,
+
+
 }) => {
   const dispatch = useAppDispatch()
 
@@ -29,7 +34,9 @@ export const DeletePackModal: FC<DeletePackModalType> = ({
       operetionTitle={'Delete'}
       handleOperation={deleteCardPack}
       isOpenModal={isOpenModal}
-      setIsOpenModal={setIsOpenModal}>
+      setIsOpenModal={setIsOpenModal}
+          
+    >
         
         
       <div>Delete Pack</div>

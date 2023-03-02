@@ -51,19 +51,32 @@ export const Pack: FC<PackPropsType> = ({ pack }) => {
             }}>
             Learn
           </Button>
-          <EditPackModal
-            packId={pack._id}
-            name={pack.name}
-            setIsOpenModal={setIsOpenModalUpdate}
-            isOpenModal={isOpenModalUpdate}
-          />
+          {pack.user_id === userId ? (
+            <>
+              <EditPackModal
+                packId={pack._id}
+                name={pack.name}
+                setIsOpenModal={setIsOpenModalUpdate}
+                isOpenModal={isOpenModalUpdate}
+              />
 
-          <DeletePackModal
-            isOpenModal={isOpenModalDelete}
-            setIsOpenModal={setIsOpenModalDelete}
-            cardPackId={pack._id}
-            packName={pack.name}
-          />
+              <DeletePackModal
+                isOpenModal={isOpenModalDelete}
+                setIsOpenModal={setIsOpenModalDelete}
+                cardPackId={pack._id}
+                packName={pack.name}
+              />
+            </>
+          ) : (
+            <>
+              <Button size="small" disabled>
+                Update Pack
+              </Button>
+              <Button size="small" disabled>
+                Delete
+              </Button>
+            </>
+          )}
         </td>
       </tr>
     </>
